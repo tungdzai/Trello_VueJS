@@ -24,10 +24,23 @@
 
     </div>
     <div class="rightPanel">
-        <div class="title">Họ và tên:{{name}}</div>
-        <div class="title">Ngày sinh:{{birth}}</div>
-        <div class="title">Số điện thoại:{{phone}}</div>
-        <div class="title">Link facebook:{{facebook}}</div>
+        <div class="title">
+            <span class="infoLabel">Họ tên:</span>
+            <span class="infoValue">{{fullName}}</span>
+        </div>
+        <div class="title">
+            <span class="infoLabel">Ngày sinh:</span>
+            <span class="infoValue">{{birthday}}</span>
+        </div>
+        <div class="title">
+            <span class="infoLabel">Số điện thoại:</span>
+            <span class="infoValue">{{numberPhone}}</span>
+        </div>
+        <div class="title">
+            <span class="infoLabel">Link facebook:</span>
+            <span class="infoValue"><a href="linkFB" target="_blank">{{linkFB}}</a></span>
+        </div>
+
     </div>
 </div>
 </template>
@@ -36,19 +49,33 @@
 export default {
     data() {
         return {
-            name: 'Zent Coding School',
-            birth: 'Zent Coding School',
-            phone: 'Zent Coding School',
-            facebook: 'Zent Coding School',
+            name: '',
+            birth: '',
+            phone: '',
+            facebook: '',
+            fullName: '',
+            birthday: '',
+            numberPhone: '',
+            linkFB: '',
 
         }
     },
-    methods:{
-        reset(){
-            this.name='';
+    methods: {
+        reset() {
+            this.name = ''
+            this.birth = ''
+            this.phone = ''
+            this.facebook = ''
+            this.fullName = ''
+            this.birthday = ''
+            this.numberPhone = ''
+            this.linkFB = ''
         },
         add(){
-            
+            this.fullName= this.name
+            this.birthday= this.birth
+            this.numberPhone= this.phone
+            this.linkFB= this.facebook
         }
     }
 }
@@ -82,11 +109,13 @@ export default {
                 height: 40px;
                 width: 100%
             }
-            .btn_save{
+
+            .btn_save {
                 margin-right: 10px;
                 padding: 10px;
             }
-            .btn_clear{
+
+            .btn_clear {
                 margin-left: 10px;
                 padding: 10px;
             }

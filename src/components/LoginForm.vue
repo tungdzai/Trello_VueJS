@@ -4,6 +4,7 @@
         <div class="inputWrap">
             <div class="inputLabel">Họ và tên</div>
             <input type="text" placeholder="Họ và Tên" v-model="name">
+            <p class="error_name">{{error_name}}</p>
         </div>
         <div class="inputWrap">
             <div class="inputLabel">Ngày sinh</div>
@@ -12,6 +13,7 @@
         <div class="inputWrap">
             <div class="inputLabel">Số điện thoại</div>
             <input type="text" placeholder="Số điện thoại" v-model="phone">
+            <p class="error_name">{{error_phone}}</p>
         </div>
         <div class="inputWrap">
             <div class="inputLabel">Link facebook</div>
@@ -57,8 +59,10 @@ export default {
             birthday: '',
             numberPhone: '',
             linkFB: '',
+            error_name: ''
 
         }
+
     },
     methods: {
         reset() {
@@ -70,12 +74,28 @@ export default {
             this.birthday = ''
             this.numberPhone = ''
             this.linkFB = ''
+            this.error_name = ''
+
         },
-        add(){
-            this.fullName= this.name
-            this.birthday= this.birth
-            this.numberPhone= this.phone
-            this.linkFB= this.facebook
+
+        validate() {
+            if (!this.name) {
+                this.error_name = 'Bạn chưa nhập Họ và Tên'
+            } else if (this.name.length <= 7) {
+                this.error_name = 'Họ và tên chưa đúng định dạng'
+                this.fullName = ''
+
+            } else {
+                this.error_name = ''
+                this.fullName = this.name
+            }
+        },
+        add() {
+
+            this.birthday = this.birth
+            this.numberPhone = this.phone
+            this.linkFB = this.facebook
+            this.validate()
         }
     }
 }
@@ -119,6 +139,12 @@ export default {
                 margin-left: 10px;
                 padding: 10px;
             }
+
+            .error_name {
+                text-align: left;
+                color: red;
+                opacity: 0.4;
+            }
         }
     }
 
@@ -136,6 +162,10 @@ export default {
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 20px;
+
+            a {
+                text-decoration: none;
+            }
         }
     }
 }

@@ -2,21 +2,24 @@
 <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <loginForm />
+    <!-- <loginForm /> -->
     <!-- <HW_2/> -->
+    <HocNhom_1/>
 </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import loginForm from './components/LoginForm.vue'
+// import loginForm from './components/LoginForm.vue'
 // import HW_2 from './components/HW_2.vue'
+import HocNhom_1 from './components/HocNhom_1.vue'
 export default {
     name: 'App',
     components: {
         // HelloWorld,
-        loginForm
+        // loginForm
         // HW_2
+        HocNhom_1
     }
 }
 </script>

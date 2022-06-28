@@ -37,8 +37,8 @@ export default {
         clear() {
             this.hien_thi = '';
         },
-        del(){
-            this.hien_thi=this.hien_thi-1;
+        del() {
+            this.hien_thi = this.hien_thi - 1;
         },
         phantram() {
             this.hien_thi = parseFloat(this.hien_thi) / 100;
@@ -103,6 +103,9 @@ export default {
     grid-column: 1/5;
     background-color: black;
     color: white;
+    text-align: right;
+    padding: 10px;
+
 }
 
 .btn {

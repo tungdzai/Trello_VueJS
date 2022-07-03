@@ -8,7 +8,8 @@
     <!-- <Lesson_2/> -->
     <!-- <Lesson_2_Computed/> -->
     <!-- <Lesson_2_EX01/> -->
-    <HW_4 />
+    <!-- <HW_4 /> -->
+    <HW_5 />
 </div>
 </template>
 
@@ -20,7 +21,7 @@
 // import Lesson_2 from './components/Lesson_2.vue'
 // import Lesson_2_Computed from './components/Lesson_2_Computed.vue'
 // import Lesson_2_EX01 from './components/Lesson_2_EX01.vue'
-import HW_4 from './components/HW_4.vue'
+import HW_5 from './components/HW_5.vue'
 
 export default {
     name: 'App',
@@ -32,7 +33,9 @@ export default {
         // Lesson_2
         // Lesson_2_Computed
         // Lesson_2_EX01
-        HW_4
+        // HW_4
+        HW_5
+        
     }
 }
 </script>

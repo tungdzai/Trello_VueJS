@@ -7,7 +7,8 @@
     <!-- <HocNhom_1/> -->
     <!-- <Lesson_2/> -->
     <!-- <Lesson_2_Computed/> -->
-    <Lesson_2_EX01/>
+    <!-- <Lesson_2_EX01/> -->
+    <HW_4 />
 </div>
 </template>
 
@@ -18,7 +19,9 @@
 // import HocNhom_1 from './components/HocNhom_1.vue'
 // import Lesson_2 from './components/Lesson_2.vue'
 // import Lesson_2_Computed from './components/Lesson_2_Computed.vue'
-import Lesson_2_EX01 from './components/Lesson_2_EX01.vue'
+// import Lesson_2_EX01 from './components/Lesson_2_EX01.vue'
+import HW_4 from './components/HW_4.vue'
+
 export default {
     name: 'App',
     components: {
@@ -28,7 +31,8 @@ export default {
         // HocNhom_1
         // Lesson_2
         // Lesson_2_Computed
-        Lesson_2_EX01
+        // Lesson_2_EX01
+        HW_4
     }
 }
 </script>

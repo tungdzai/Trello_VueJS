@@ -9,7 +9,9 @@
     <!-- <Lesson_2_Computed/> -->
     <!-- <Lesson_2_EX01/> -->
     <!-- <HW_4 /> -->
-    <HW_5 />
+    <!-- <HW_5 /> -->
+    <!-- <HocNhom_2/> -->
+    <FormLogin/>
 </div>
 </template>
 
@@ -21,7 +23,9 @@
 // import Lesson_2 from './components/Lesson_2.vue'
 // import Lesson_2_Computed from './components/Lesson_2_Computed.vue'
 // import Lesson_2_EX01 from './components/Lesson_2_EX01.vue'
-import HW_5 from './components/HW_5.vue'
+// import HW_5 from './components/HW_5.vue'
+// import HocNhom_2 from './components/HocNhom_2.vue'
+import FormLogin from './components/Unit03/FormLogin.vue'
 
 export default {
     name: 'App',
@@ -34,7 +38,9 @@ export default {
         // Lesson_2_Computed
         // Lesson_2_EX01
         // HW_4
-        HW_5
+        // HW_5
+        // HocNhom_2
+        FormLogin
         
     }
 }

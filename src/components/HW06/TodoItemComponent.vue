@@ -38,6 +38,7 @@
 
 <style lang="scss" scoped>
 
+
     .wrap {
         display: flex;
         align-items: center;
@@ -50,9 +51,7 @@
             margin-left: 12px;
             color: #253036;
 
-            &.complete {
-                text-decoration: line-through;
-            }
+        
         }
 
         .deleteButton {

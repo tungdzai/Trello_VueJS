@@ -11,7 +11,8 @@
     <!-- <HW_4 /> -->
     <!-- <HW_5 /> -->
     <!-- <HocNhom_2/> -->
-    <FormLogin/>
+    <!-- <FormLogin/> -->
+    <ThucHanh01/>
 </div>
 </template>
 
@@ -25,7 +26,8 @@
 // import Lesson_2_EX01 from './components/Lesson_2_EX01.vue'
 // import HW_5 from './components/HW_5.vue'
 // import HocNhom_2 from './components/HocNhom_2.vue'
-import FormLogin from './components/Unit03/FormLogin.vue'
+// import FormLogin from './components/Unit03/FormLogin.vue'
+import ThucHanh01 from './components/Unit04/ThucHanh01.vue'
 
 export default {
     name: 'App',
@@ -40,7 +42,8 @@ export default {
         // HW_4
         // HW_5
         // HocNhom_2
-        FormLogin
+        // FormLogin
+        ThucHanh01
         
     }
 }

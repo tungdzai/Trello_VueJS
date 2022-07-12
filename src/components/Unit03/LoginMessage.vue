@@ -1,14 +1,18 @@
 <template>
 <div class="infoWrap">
     <div class="infoLabel">
-        Xin chào
+        Email :{{email}}
+        <br>
+        Password: {{password}}
     </div>
 </div>
 </template>
 
 <script>
 export default {
-    name: "LoginMessage"
+    name: "LoginMessage",
+    // Lấy data từ component cha thông qua props
+    props: ['email', 'password']
 }
 </script>
 
@@ -27,6 +31,7 @@ export default {
         .infoLabel {
             font-weight: bold;
             color: #00AAAA;
+            text-align: left;
         }
     }
 </style>

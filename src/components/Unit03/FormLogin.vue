@@ -1,7 +1,8 @@
 <template>
 <div class="container">
-    <LoginForm/>
-    <LoginMessage/>
+    <LoginForm @emitData="emitData" />
+    <LoginMessage :email="email" :password="password" />
+    <!-- Cú pháp dùng prop đẩy data từ component cha (FormLogin) xuống component con (LoginMessage) -->
 </div>
 </template>
 
@@ -13,6 +14,19 @@ export default {
     components: {
         LoginForm,
         LoginMessage,
+    },
+    data() {
+        return {
+            email: '',
+            password: ''
+        }
+    },
+    methods: {
+        emitData(data) {
+            
+            this.email = data.email
+            this.password = data.password
+        }
     }
 }
 </script>

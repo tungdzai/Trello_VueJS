@@ -2,19 +2,36 @@
 <div class="loginWrap">
     <div class="inputWrap">
         <div class="inputLabel">Tên đăng nhập</div>
-        <input type="text">
+        <input type="text" v-model="email">
     </div>
     <div class="inputWrap">
         <div class="inputLabel">Mật khẩu</div>
-        <input type="password">
+        <input type="password" v-model="password">
     </div>
-    <button class="loginButton">Đăng nhập</button>
+    <button class="loginButton" @click="selectedComponentB">Đăng nhập</button>
 </div>
 </template>
 
 <script>
 export default {
-    name: "LoginForm"
+    name: "LoginForm",
+    data() {
+        return {
+            email: '',
+            password: ''
+        }
+
+    },
+    methdos: {
+        selectedComponentB() {
+            let data = {
+                email: this.email,
+                password: this.password
+            }
+            // phát ra sự kiện 'emitData' với dữ liệu là data'
+            this.$emit('emitData', data);
+        }
+    }
 }
 </script>
 

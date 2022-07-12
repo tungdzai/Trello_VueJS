@@ -11,8 +11,9 @@
     <!-- <HW_4 /> -->
     <!-- <HW_5 /> -->
     <!-- <HocNhom_2/> -->
-    <!-- <FormLogin/> -->
-    <ThucHanh01/>
+    <!-- <FormLogin/> cần support -->
+    <!-- <ThucHanh01/> -->
+    <TodoComponent/>
 </div>
 </template>
 
@@ -27,7 +28,8 @@
 // import HW_5 from './components/HW_5.vue'
 // import HocNhom_2 from './components/HocNhom_2.vue'
 // import FormLogin from './components/Unit03/FormLogin.vue'
-import ThucHanh01 from './components/Unit04/ThucHanh01.vue'
+// import ThucHanh01 from './components/Unit04/ThucHanh01.vue'
+import TodoComponent from './components/HW06/TodoComponent.vue'
 
 export default {
     name: 'App',
@@ -43,7 +45,8 @@ export default {
         // HW_5
         // HocNhom_2
         // FormLogin
-        ThucHanh01
+        // ThucHanh01
+        TodoComponent
         
     }
 }

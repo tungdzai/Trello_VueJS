@@ -2,40 +2,46 @@
 <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <!-- <loginForm /> -->
+    <loginForm />
     <!-- <HW_2/> -->
     <!-- <HocNhom_1/> -->
     <!-- <Lesson_2/> -->
     <!-- <Lesson_2_Computed/> -->
     <!-- <Lesson_2_EX01/> -->
     <!-- <HW_4 /> -->
-    <HW_5 />
+    <!-- <HW_5 /> -->
+    <!-- <HW01 /> -->
+    <!-- <HW02/> -->
 </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-// import loginForm from './components/LoginForm.vue'
+import loginForm from './components/LoginForm.vue'
 // import HW_2 from './components/HW_2.vue'
 // import HocNhom_1 from './components/HocNhom_1.vue'
 // import Lesson_2 from './components/Lesson_2.vue'
 // import Lesson_2_Computed from './components/Lesson_2_Computed.vue'
 // import Lesson_2_EX01 from './components/Lesson_2_EX01.vue'
-import HW_5 from './components/HW_5.vue'
+// import HW_5 from './components/HW_5.vue'
+// import HW01 from './Code practice/HW01.vue'
+// import HW02 from './Code practice/HW02.vue'
 
 export default {
     name: 'App',
     components: {
         // HelloWorld,
-        // loginForm
+        loginForm
         // HW_2
         // HocNhom_1
         // Lesson_2
         // Lesson_2_Computed
         // Lesson_2_EX01
         // HW_4
-        HW_5
-        
+        // HW_5
+        // HW01
+        // HW02
+
     }
 }
 </script>

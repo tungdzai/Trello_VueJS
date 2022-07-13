@@ -30,6 +30,7 @@ export default {
             previous: null,
             hien_thi: '',
             clc: null,
+
             clcClicked: false,
         }
     },
@@ -79,7 +80,7 @@ export default {
         },
         add() {
             this.hien_thi = this.clc(
-                parseFloat(this.hien_thi),
+                parseFloat(this.hien_thi ),
                 parseFloat(this.previous),
 
             )
@@ -104,7 +105,7 @@ export default {
     background-color: black;
     color: white;
     text-align: right;
-    padding: 10px;
+    padding: 0.4rem;
 
 }
 

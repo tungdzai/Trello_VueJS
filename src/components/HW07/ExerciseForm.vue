@@ -1,7 +1,7 @@
 <template>
 <div class="container">
-    <ProductForm />
-    <ProductList />
+    <ProductForm :product="product" @onCreateProduct="createProduct" @onUpdateProduct="updateProduct" @onClear="clearData" />
+    <ProductList :products="products" @onEditProduct="editProduct" @onDeleteProduct="deleteProduct" />
 </div>
 </template>
 
@@ -19,7 +19,38 @@ export default {
             products: [],
             product: {}
         }
+    },
+    methods: {
+        createProduct(product) {
+            this.products.push(product)
+        },
+        updateProduct(editableProduct) {
+            let index = this.products.findIndex((product) => {
+                return product.id === editableProduct.id
+            })
+            if (index !== -1) {
+                let newProducts = JSON.parse(JSON.stringify(this.products))
+                newProducts[index] = {
+                    ...newProducts[index],
+                    name: editableProduct.name,
+                    price: editableProduct.price,
+                    quantity: editableProduct.quantity,
+                }
+                this.products = newProducts
+            }
+        },
+        editProduct(product){
+            this.product=product
+        },
+        deleteProduct(index){
+            this.products.splice(index,1)
+        },
+        clearData(){
+            this.product={}
+        }
+
     }
+
 }
 </script>
 

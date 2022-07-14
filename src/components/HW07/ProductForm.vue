@@ -3,27 +3,29 @@
     <div class="title">Sản phẩm</div>
     <div class="inputWrap">
         <div class="inputLabel">Tên sản phẩm <span>*</span></div>
-        <input type="text" placeholder="Nhập tên sản phẩm" v-model="name">
+        <input type="text" placeholder="Nhập tên sản phẩm" v-model="name" :class="{hasError: nameErrorMsg.length > 0}">
         <div class="errorMsg">
             {{nameErrorMsg}}
         </div>
     </div>
     <div class="inputWrap">
         <div class="inputLabel">Đơn giá <span>(*)</span></div>
-        <input type="number" placeholder="Nhập đơn giá sản phẩm" v-model="price">
+        <input type="number" placeholder="Nhập đơn giá sản phẩm" v-model="price" :class="{hasError: priceErrorMsg.length > 0}">
         <div class="errorMsg">
             {{priceErrorMsg}}
         </div>
     </div>
     <div class="inputWrap">
         <div class="inputLabel">Số lượng <span>(*)</span></div>
-        <input type="number" placeholder="Nhập số lượng sản phẩm" v-model="quantity">
+        <input type="number" placeholder="Nhập số lượng sản phẩm" v-model="quantity" :class="{hasError: quantityErrorMsg.length > 0}">
         <div class="errorMsg">
             {{quantityErrorMsg}}
         </div>
     </div>
     <div class="formActions">
-        <button class="saveButton" @click="saveProduct">Tạo mới</button>
+        <button class="saveButton" @click="saveProduct">
+            {{Object.keys(this.product).length === 0 ? 'Tạo mới' : 'Cập nhật'}}
+        </button>
         <button class="defaultButton" @click="clearData">Hủy</button>
     </div>
 </div>
@@ -60,6 +62,52 @@ export default {
         }
     },
     methods: {
+        isDataValidated() {
+            let result = true
+
+            if (!this.name) {
+                result = false
+                this.nameErrorMsg = 'Tên sản phẩm không được để trống'
+            }
+
+            if (!this.price) {
+                result = false
+                this.priceErrorMsg = 'Giá sản phẩm không được để trống'
+            }
+
+            if (!this.quantity) {
+                result = false
+                this.quantityErrorMsg = 'Số lượng sản phẩm không được để trống'
+            }
+
+            return result
+        },
+        clearData() {
+            this.name = ''
+            this.price = ''
+            this.quantity = ''
+            this.$emit('onClear')
+        },
+        saveProduct() {
+            if (this.isDataValidated()) {
+                if (Object.keys(this.product).length === 0) {
+                    this.$emit('onCreateProduct', {
+                        id: `SP${new Date().getTime()}`,
+                        name: this.name,
+                        price: parseInt(this.price),
+                        quantity: parseInt(this.quantity),
+                    })
+                } else {
+                    this.$emit('onUpdateProduct', {
+                        id: this.product.id,
+                        name: this.name,
+                        price: parseInt(this.price),
+                        quantity: parseInt(this.quantity),
+                    })
+                }
+                this.clearData()
+            }
+        },
 
     }
 }

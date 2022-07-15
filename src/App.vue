@@ -16,7 +16,8 @@
     <!-- <FormLogin/> cần support -->
     <!-- <ThucHanh01/> -->
     <!-- <TodoComponent/> -->
-    <ExerciseForm/>
+    <!-- <ExerciseForm/> -->
+    <ProductPage/>
 
 </div>
 </template>
@@ -36,7 +37,8 @@
 // import FormLogin from './components/Unit03/FormLogin.vue'
 // import ThucHanh01 from './components/Unit04/ThucHanh01.vue'
 // import TodoComponent from './components/HW06/TodoComponent.vue'
-import ExerciseForm from './components/HW07/ExerciseForm.vue'
+// import ExerciseForm from './components/HW07/ExerciseForm.vue'
+import ProductPage from  './components/HW08/ProductPage.vue'
 
 export default {
     name: 'App',
@@ -59,7 +61,8 @@ export default {
         // FormLogin
         // ThucHanh01
         // TodoComponent
-        ExerciseForm
+        // ExerciseForm
+        ProductPage
         
 
     }

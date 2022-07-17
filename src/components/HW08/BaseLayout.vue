@@ -1,7 +1,7 @@
 <template>
 <el-container>
     <el-aside class="sideBar">
-        <el-menu text-color="#fff" background-color="#001529" active-text-color="#ffd04b" default-active="2">
+        <el-menu text-color="#fff" background-color="#001529" active-text-color="#ffd04b" default-active='active()'>
             <el-menu-item index="1">
                 <i class="el-icon-menu"></i>
                 <span>Tổng quan</span>
@@ -77,6 +77,12 @@ export default {
 
         }
     },
+    methods:{
+        active(){
+            return 2
+        }
+
+    }
 
 
 

@@ -17,7 +17,8 @@
     <!-- <ThucHanh01/> -->
     <!-- <TodoComponent/> -->
     <!-- <ExerciseForm/> -->
-    <ProductPage/>
+    <!-- <ProductPage/> -->
+    <NewsDetailPage/>
 
 </div>
 </template>
@@ -38,7 +39,9 @@
 // import ThucHanh01 from './components/Unit04/ThucHanh01.vue'
 // import TodoComponent from './components/HW06/TodoComponent.vue'
 // import ExerciseForm from './components/HW07/ExerciseForm.vue'
-import ProductPage from  './components/HW08/ProductPage.vue'
+// import ProductPage from  './components/HW08/ProductPage.vue'
+import NewsDetailPage from  './components/HW09/NewsDetailPage.vue'
+
 
 export default {
     name: 'App',
@@ -62,7 +65,8 @@ export default {
         // ThucHanh01
         // TodoComponent
         // ExerciseForm
-        ProductPage
+        // ProductPage
+        NewsDetailPage
         
 
     }

@@ -1,4 +1,5 @@
 <template>
+
 <div class="infoWrap">
     <div class="infoLabel">
         Email :{{email}}
@@ -35,3 +36,4 @@ export default {
         }
     }
 </style>
+>>>>>>> 133aa0d45b4dcbb733926731663a83354b215b63

@@ -44,9 +44,11 @@ export default {
 
     },
     methods: {
+        //Nối chuỗi
         handconcat() {
             console.log(this.Array1.concat(this.Array2));
-        },
+        }
+         
         handFilter() {
             let result = this.word.filter(word => word.length > 4)
             console.log(result)

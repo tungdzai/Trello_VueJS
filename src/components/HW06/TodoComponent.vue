@@ -11,7 +11,7 @@
             <div class="listWrap" v-if="tasks.length > 0">
                 <TodoItem
                     v-for="(task, index) in tasks"
-                    :task="task"
+            
                     :key="task.id"
                     @changeStatus="(value) => handleChangeStatus(value, index)"
                     @onDeleteItem="handleDeleteItem(index)"

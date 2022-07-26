@@ -1,11 +1,12 @@
 <template>
+<div></div>
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
   data(){
-    products:[
+    [
       {
         id:1,
         name:"iphone 12 prm",

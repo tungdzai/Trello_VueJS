@@ -40,12 +40,14 @@
 <script>
 export default {
     name: "HocNhom_2",
-    data: {
+    data: function() {
+return {
         errors: [],
         name: null,
         email: null,
         movie: null
-    },
+    };
+},
     methods: {
         checkForm: function (e) {
             this.errors = [];

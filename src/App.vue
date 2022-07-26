@@ -1,9 +1,17 @@
 <template>
-  <div id="app">
-    
-    <router-view/>
+  <div id="app">   
+    <FormLogin/>
   </div>
 </template>
+<script>
+import FormLogin from '../src/components/HW10/FormLogin.vue'
+export default {
+  name:'App',
+  components:{
+    FormLogin
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

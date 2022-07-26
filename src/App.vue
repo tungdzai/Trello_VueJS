@@ -16,9 +16,9 @@
     <!-- <FormLogin/> cần support -->
     <!-- <ThucHanh01/> -->
     <!-- <TodoComponent/> -->
-    <!-- <ExerciseForm/> -->
+    <ExerciseForm/>
     <!-- <ProductPage/> -->
-    <NewsDetailPage/>
+    <!-- <NewsDetailPage/> -->
 
 </div>
 </template>
@@ -38,9 +38,9 @@
 // import FormLogin from './components/Unit03/FormLogin.vue'
 // import ThucHanh01 from './components/Unit04/ThucHanh01.vue'
 // import TodoComponent from './components/HW06/TodoComponent.vue'
-// import ExerciseForm from './components/HW07/ExerciseForm.vue'
+import ExerciseForm from './components/HW07/ExerciseForm.vue'
 // import ProductPage from  './components/HW08/ProductPage.vue'
-import NewsDetailPage from  './components/HW09/NewsDetailPage.vue'
+// import NewsDetailPage from  './components/HW09/NewsDetailPage.vue'
 
 
 export default {
@@ -64,9 +64,9 @@ export default {
         // FormLogin
         // ThucHanh01
         // TodoComponent
-        // ExerciseForm
+        ExerciseForm
         // ProductPage
-        NewsDetailPage
+        // NewsDetailPage
         
 
     }

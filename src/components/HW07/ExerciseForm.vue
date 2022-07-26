@@ -1,7 +1,7 @@
 <template>
 <div class="container">
-    <ProductForm :product="product" @onCreateProduct="createProduct" @onUpdateProduct="updateProduct" @onClear="clearData" />
-    <ProductList :products="products" @onEditProduct="editProduct" @onDeleteProduct="deleteProduct" />
+    <ProductForm :product="product" @onCreateProduct="create" @onUpdateProduct="update" @onClear="clear" />
+    <ProductList :products="products" @onEditProduct="edit" @onDeleteProduct="delete" />
 </div>
 </template>
 
@@ -21,10 +21,10 @@ export default {
         }
     },
     methods: {
-        createProduct(product) {
+        create(product) {
             this.products.push(product)
         },
-        updateProduct(editableProduct) {
+        update(editableProduct) {
             let index = this.products.findIndex((product) => {
                 return product.id === editableProduct.id
             })
@@ -39,13 +39,13 @@ export default {
                 this.products = newProducts
             }
         },
-        editProduct(product){
+        edit(product){
             this.product=product
         },
-        deleteProduct(index){
+        delete(index){
             this.products.splice(index,1)
         },
-        clearData(){
+        clear(){
             this.product={}
         }
 

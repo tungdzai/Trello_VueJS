@@ -25,7 +25,7 @@ const routes = [
   },
 // LoginForm
   {
-    path: '/FormLogin/:FormLoginId',
+    path: '/ /:FormLoginId',
     name: 'FormLogin',
     component: () => import('../components/HW10/FormLogin.vue'),
 
@@ -45,14 +45,19 @@ const routes = [
   component: () => import('../layouts/BaseLayout.vue'),
   children:[
     {
-      path: 'BaoCaoThongKe',
-      name: 'BaoCaoThongKe',
-      component: () => import('../views/BaoCaoThongKe.vue')
+      path: 'QuanLySanPham',
+      name: 'QuanLySanPham',
+      component: () => import('../views/QuanLySanPham.vue')
     },
     {
       path: 'QuanLyHoaDon',
       name: 'QuanLyHoaDon',
       component: () => import('../views/QuanLyHoaDon.vue')
+    },
+    {
+      path: 'BaoCaoThongKe',
+      name: 'BaoCaoThongKe',
+      component: () => import('../views/BaoCaoThongKe.vue')
     },
 
   ]

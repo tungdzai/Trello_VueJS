@@ -69,7 +69,7 @@ export default {
             });
         },
         ForgotPass(){
-            this.$router.push({ name: 'ForgotPass', params: { ForgotPassId: '111' } })
+            this.$router.push({ name: 'ForgotPass', params: { ForgotPassId: '113' } })
         }
     }
 }

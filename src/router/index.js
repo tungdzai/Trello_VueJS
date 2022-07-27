@@ -1,28 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
-  {
-    path: '/product',
-    name: 'product',
-    component: () => import('../views/ProductView.vue')
-  },
+
   {
     path: '/users/:userId',
     name: 'user',
@@ -40,8 +22,45 @@ const routes = [
       },
 
     ]
-  }
+  },
+// LoginForm
+  {
+    path: '/FormLogin/:FormLoginId',
+    name: 'FormLogin',
+    component: () => import('../components/HW10/FormLogin.vue'),
+
+  },
+  {
+    path: '/ForgotPass/:ForgotPassId',
+    name: 'ForgotPass',
+    component: () => import('../components/HW10/ForgotPass.vue'),
+
+  },
+ 
+  
+  //admin
+{
+  path: '/BaseLayout/:BaseLayoutId',
+  name: 'BaseLayout',
+  component: () => import('../layouts/BaseLayout.vue'),
+  children:[
+    {
+      path: 'BaoCaoThongKe',
+      name: 'BaoCaoThongKe',
+      component: () => import('../views/BaoCaoThongKe.vue')
+    },
+    {
+      path: 'QuanLyHoaDon',
+      name: 'QuanLyHoaDon',
+      component: () => import('../views/QuanLyHoaDon.vue')
+    },
+
+  ]
+},
+
+
 ]
+
 
 const router = new VueRouter({
   mode: 'history',

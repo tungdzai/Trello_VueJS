@@ -1,26 +1,28 @@
 <template>
 <div class="container">
-    <div class="frmWrap">
-        <div class="LogoWrap">
-            <span> <img src="../../assets/images/zent1.png" alt=""></span>
-            <p class="text">Mật khẩu mới sẽ được gửi vào mail của bạn .</p>
-        </div>
+    <div class="frmLogin">
+        <div class="frmWrap">
+            <div class="LogoWrap">
+                <span> <img src="../../assets/images/logoflixgo.png" alt=""></span>
+                <p class="text">Mật khẩu mới sẽ được gửi vào Email của bạn </p>
+            </div>
 
-        <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" label-width="120px" class="demo-ruleForm">
-            <el-form-item prop="email" label="Email" :rules="[
+            <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" label-width="120px" class="demo-ruleForm">
+                <el-form-item prop="email" label="Email" :rules="[
       { required: true, message: 'Email không được để trống !', trigger: 'blur' },
       { type: 'email', message: 'Email chưa đúng định dạng !', trigger: ['blur', 'change'] }
     ]">
-                <el-input v-model="ruleForm.email"></el-input>
-            </el-form-item>
+                    <el-input v-model="ruleForm.email" placeholder="Email..."></el-input>
+                </el-form-item>
 
-            <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')" :plain="true">Gửi mật khẩu</el-button>
-            </el-form-item>
-            <el-form-item>
-                <p @click="loginform">Đăng nhập</p>
-            </el-form-item>
-        </el-form>
+                <el-form-item>
+                    <el-button type="primary" @click="submitForm('ruleForm')" :plain="true">Gửi mật khẩu</el-button>
+                </el-form-item>
+                <el-form-item>
+                    <p @click="loginform">Đăng nhập</p>
+                </el-form-item>
+            </el-form>
+        </div>
     </div>
 </div>
 </template>
@@ -66,8 +68,13 @@ export default {
                 }
             });
         },
-        loginform(){
-            this.$router.push({ name: 'FormLogin', params: { FormLoginId: '111' } })
+        loginform() {
+            this.$router.push({
+                name: 'FormLogin',
+                params: {
+                    FormLoginId: '111'
+                }
+            })
         }
     }
 }
@@ -75,25 +82,44 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+    background-color: #46b4d6;
+    height: 100vh;
     margin: 0;
     padding: 0;
+    position: relative;
 
-    .frmWrap {
+    .frmLogin {
         width: 450px;
         margin: 0 auto;
-        border: 1px solid #000;
 
-        .LogoWrap {
-            img {
-                width: 50%;
-            }
-            p{
-                color: rgb(143, 138, 138);
-            }
-        }
+        .frmWrap {
+            width: 450px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: unset;
+            border-radius: 10px;
+            position: absolute;
+            z-index: 1;
+            margin-top: 200px;
 
-        .demo-ruleForm {
-            padding-right: 90px;
+            .LogoWrap {
+                img {
+                    width: 50%;
+                }
+                p{
+                   color: rgb(204, 197, 197);
+                }
+            }
+            .demo-ruleForm {
+                padding-right: 90px;
+            }
+
+            .forgotpass {
+                background-color: #fff;
+                border: unset;
+                cursor: pointer;
+            }
+
         }
 
     }

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import BaseLayout from '../views/BaoCaoThongKe.vue'
+import BaseLayout from '../layouts/BaseLayout.vue'
 export default {
     name: 'BaoCaoThongKe',
     components: {

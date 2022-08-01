@@ -8,15 +8,15 @@
             </el-menu-item>
             <el-menu-item index="2">
                 <i class="el-icon-s-shop"></i>
-                <span>Quản lý sản phẩm</span>
+                <span @click="QuanLySanPham">Quản lý sản phẩm</span>
             </el-menu-item>
             <el-menu-item index="3">
                 <i class="el-icon-document"></i>
-                <span>Quản lý hóa đơn</span>
+                <span @click="QuanLyHoaDon">Quản lý hóa đơn</span>
             </el-menu-item>
             <el-menu-item index="4">
                 <i class="el-icon-s-data"></i>
-                <span>Báo cáo thống kê</span>
+                <span @click="BaoCaoThongKe">Báo cáo thống kê</span>
             </el-menu-item>
             <el-submenu index="5">
                 <template slot="title">
@@ -55,7 +55,7 @@
                         <el-dropdown-item>Đổi mật khẩu</el-dropdown-item>
                         <el-dropdown-item>Cấu hình</el-dropdown-item>
                         <el-dropdown-item>
-                            Đăng xuất
+                            <p @click="Logout"> Đăng xuất</p>
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -63,7 +63,9 @@
         </el-header>
         <!-- main -->
         <el-main>
-            <slot></slot>
+            <slot>
+                <router-view/>
+            </slot>
         </el-main>
     </el-container>
 </el-container>
@@ -80,6 +82,18 @@ export default {
     methods:{
         active(){
             return 2
+        },
+        Logout(){
+            this.$router.push({ name: 'FormLogin', params: { FormLoginId: '112' } })
+        },
+        QuanLySanPham(){
+             this.$router.push({ name: 'QuanLySanPham', params: { BaseLayoutId: '111' } })
+        },
+        BaoCaoThongKe(){
+             this.$router.push({ name: 'BaoCaoThongKe', params: { BaseLayoutId: '111' } })
+        },
+        QuanLyHoaDon(){
+             this.$router.push({ name: 'QuanLyHoaDon', params: { BaseLayoutId: '111' } })
         }
 
     }

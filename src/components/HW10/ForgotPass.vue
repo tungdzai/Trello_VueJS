@@ -3,7 +3,9 @@
     <div class="frmWrap">
         <div class="LogoWrap">
             <span> <img src="../../assets/images/zent1.png" alt=""></span>
+            <p class="text">Mật khẩu mới sẽ được gửi vào mail của bạn .</p>
         </div>
+
         <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" label-width="120px" class="demo-ruleForm">
             <el-form-item prop="email" label="Email" :rules="[
       { required: true, message: 'Email không được để trống !', trigger: 'blur' },
@@ -12,25 +14,20 @@
                 <el-input v-model="ruleForm.email"></el-input>
             </el-form-item>
 
-            <el-form-item label="Password" prop="pass">
-                <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
-            </el-form-item>
-
             <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">Đăng nhập</el-button>
+                <el-button type="primary" @click="submitForm('ruleForm')" :plain="true">Gửi mật khẩu</el-button>
             </el-form-item>
             <el-form-item>
-              <p @click="ForgotPass">Quên mật khẩu ?</p>
+                <p @click="loginform">Đăng nhập</p>
             </el-form-item>
         </el-form>
     </div>
-    <router-view/>
 </div>
 </template>
 
 <script>
 export default {
-    name: 'FormLogin',
+    name: 'ForgotPass',
     data() {
         var validatePass = (rule, value, callback) => {
             if (value === '') {
@@ -59,17 +56,18 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert('Đăng nhập thành công ');
-                    this.$router.push({ name: 'BaseLayout', params: { BaseLayoutId: '111' } })
-                    
+                    this.$message({
+                        message: 'Đã gửi lại mật khẩu thành công .',
+                        type: 'success'
+                    });
                 } else {
                     console.log('error submit!!');
                     return false;
                 }
             });
         },
-        ForgotPass(){
-            this.$router.push({ name: 'ForgotPass', params: { ForgotPassId: '113' } })
+        loginform(){
+            this.$router.push({ name: 'FormLogin', params: { FormLoginId: '111' } })
         }
     }
 }
@@ -89,14 +87,13 @@ export default {
             img {
                 width: 50%;
             }
+            p{
+                color: rgb(143, 138, 138);
+            }
         }
-        .demo-ruleForm{
+
+        .demo-ruleForm {
             padding-right: 90px;
-        }
-        .forgotpass{
-            background-color: #fff;
-            border: unset;
-            cursor: pointer;
         }
 
     }

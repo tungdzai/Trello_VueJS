@@ -4,26 +4,26 @@
     <div class="inputWrap">
         <div class="inputLabel">Tên sản phẩm <span>*</span></div>
         <input type="text" placeholder="Nhập tên sản phẩm" v-model="name" :class="{hasError: nameErrorMsg.length > 0}">
-        <div class="errorMsg">
+        <div class="error">
             {{nameErrorMsg}}
         </div>
     </div>
     <div class="inputWrap">
         <div class="inputLabel">Đơn giá <span>(*)</span></div>
         <input type="number" placeholder="Nhập đơn giá sản phẩm" v-model="price" :class="{hasError: priceErrorMsg.length > 0}">
-        <div class="errorMsg">
+        <div class="error">
             {{priceErrorMsg}}
         </div>
     </div>
     <div class="inputWrap">
         <div class="inputLabel">Số lượng <span>(*)</span></div>
         <input type="number" placeholder="Nhập số lượng sản phẩm" v-model="quantity" :class="{hasError: quantityErrorMsg.length > 0}">
-        <div class="errorMsg">
+        <div class="error">
             {{quantityErrorMsg}}
         </div>
     </div>
     <div class="formActions">
-        <button class="saveButton" @click="saveProduct">
+        <button class="saveButton" @click="save">
             {{Object.keys(this.product).length === 0 ? 'Tạo mới' : 'Cập nhật'}}
         </button>
         <button class="defaultButton" @click="clearData">Hủy</button>
@@ -82,13 +82,13 @@ export default {
 
             return result
         },
-        clearData() {
+        clear() {
             this.name = ''
             this.price = ''
             this.quantity = ''
             this.$emit('onClear')
         },
-        saveProduct() {
+        save() {
             if (this.isDataValidated()) {
                 if (Object.keys(this.product).length === 0) {
                     this.$emit('onCreateProduct', {
@@ -190,7 +190,7 @@ export default {
         }
     }
 
-    .errorMsg {
+    .error {
         color: #f54b5e;
         margin-top: 4px;
         font-size: 12px;

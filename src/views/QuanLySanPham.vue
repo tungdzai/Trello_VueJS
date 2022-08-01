@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import BaseLayout from './BaseLayout.vue'
+import BaseLayout from '../views/QuanLySanPham.vue'
 export default {
     name: 'QuanLySanPham',
     components: {

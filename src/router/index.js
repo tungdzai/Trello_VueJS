@@ -23,6 +23,28 @@ const routes = [
 
     ]
   },
+  // HW01
+  {
+    path: '/HW01',
+    name: 'HW01',
+    component: () => import('../components/HW01/HW01.vue')
+  },
+  {
+    path: '/HW02',
+    name: 'HW02',
+    component: () => import('../components/HW01/HW02.vue')
+  },
+  {
+    path: '/HW03',
+    name: 'HW03',
+    component: () => import('../components/HW01/HW03.vue')
+  },
+// HW02
+{
+  path: '/EX01',
+  name: 'EX01',
+  component: () => import('../components/HW02/EX01.vue')
+},
 // LoginForm
   {
     path: '/',
@@ -59,8 +81,6 @@ const routes = [
   name: 'BaoCaoThongKe',
   component: () => import('../views/BaoCaoThongKe.vue')
 },
-
-
 ]
 
 

@@ -81,6 +81,29 @@ const routes = [
   name: 'BaoCaoThongKe',
   component: () => import('../views/BaoCaoThongKe.vue')
 },
+
+
+
+{
+  path: '/LoginRegiston',
+  name: 'LoginRegiston',
+  component: () => import('../views/LoginRegiston.vue')
+},
+{
+  path: '/AdminLayout',
+  name: 'AdminLayout',
+  component: () => import('../layouts/AdminLayout.vue')
+},
+{
+  path: '/Content',
+  name: 'Content',
+  component: () => import('../views/Content.vue')
+},
+{
+  path: '/accountInFormation',
+  name: 'accountInFormation',
+  component: () => import('../views/accountInFormation.vue')
+},
 ]
 
 

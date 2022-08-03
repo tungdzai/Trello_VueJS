@@ -84,16 +84,16 @@ export default {
             return 2
         },
         Logout(){
-            this.$router.push({ name: 'FormLogin', params: { FormLoginId: '112' } })
+            this.$router.push({ name: 'FormLogin'})
         },
         QuanLySanPham(){
-             this.$router.push({ name: 'QuanLySanPham', params: { BaseLayoutId: '111' } })
+             this.$router.push({ name: 'QuanLySanPham' })
         },
         BaoCaoThongKe(){
-             this.$router.push({ name: 'BaoCaoThongKe', params: { BaseLayoutId: '111' } })
+             this.$router.push({ name: 'BaoCaoThongKe' })
         },
         QuanLyHoaDon(){
-             this.$router.push({ name: 'QuanLyHoaDon', params: { BaseLayoutId: '111' } })
+             this.$router.push({ name: 'QuanLyHoaDon' })
         }
 
     }

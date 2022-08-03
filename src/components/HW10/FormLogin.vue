@@ -1,30 +1,32 @@
 <template>
 <div class="container">
-    <div class="frmWrap">
-        <div class="LogoWrap">
-            <span> <img src="../../assets/images/zent1.png" alt=""></span>
-        </div>
-        <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" label-width="120px" class="demo-ruleForm">
-            <el-form-item prop="email" label="Email" :rules="[
+    <div class="frmLogin">
+        <div class="frmWrap">
+            <div class="LogoWrap">
+                <span> <img src="../../assets/images/logoflixgo.png" alt=""></span>
+            </div>
+            <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" label-width="120px" class="demo-ruleForm">
+                <el-form-item prop="email" label="Email" :rules="[
       { required: true, message: 'Email không được để trống !', trigger: 'blur' },
       { type: 'email', message: 'Email chưa đúng định dạng !', trigger: ['blur', 'change'] }
     ]">
-                <el-input v-model="ruleForm.email"></el-input>
-            </el-form-item>
+                    <el-input v-model="ruleForm.email" placeholder="Email..."></el-input>
+                </el-form-item>
 
-            <el-form-item label="Password" prop="pass">
-                <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
-            </el-form-item>
+                <el-form-item label="Password" prop="pass">
+                    <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="PassWord"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <p @click="ForgotPass">Quên mật khẩu ?</p>
+                </el-form-item>
 
-            <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">Đăng nhập</el-button>
-            </el-form-item>
-            <el-form-item>
-              <p @click="ForgotPass">Quên mật khẩu ?</p>
-            </el-form-item>
-        </el-form>
+                <el-form-item>
+                    <el-button type="primary" @click="submitForm('ruleForm')">Đăng nhập</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
     </div>
-    <router-view/>
+    <router-view />
 </div>
 </template>
 
@@ -60,16 +62,20 @@ export default {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     alert('Đăng nhập thành công ');
-                    this.$router.push({ name: 'BaseLayout', params: { BaseLayoutId: '111' } })
-                    
+                    this.$router.push({
+                        name: 'BaseLayout'
+                    })
+
                 } else {
                     console.log('error submit!!');
                     return false;
                 }
             });
         },
-        ForgotPass(){
-            this.$router.push({ name: 'ForgotPass', params: { ForgotPassId: '113' } })
+        ForgotPass() {
+            this.$router.push({
+                name: 'ForgotPass'
+            })
         }
     }
 }
@@ -77,29 +83,52 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+    background-color: #46b4d6;
+    height: 100vh;
     margin: 0;
     padding: 0;
+    position: relative;
 
-    .frmWrap {
+    .frmLogin {
         width: 450px;
         margin: 0 auto;
-        border: 1px solid #000;
 
-        .LogoWrap {
-            img {
-                width: 50%;
-            }
-        }
-        .demo-ruleForm{
-            padding-right: 90px;
-        }
-        .forgotpass{
+        .frmWrap {
+            width: 450px;
+            margin: 0 auto;
             background-color: #fff;
             border: unset;
-            cursor: pointer;
+            border-radius: 10px;
+            position: absolute;
+            z-index: 1;
+            margin-top: 200px;
+
+            .LogoWrap {
+                img {
+                    margin: 20px;
+                    width: 50%;
+                }
+
+            }
+
+            p {
+                margin: 0;
+                text-align: right;
+                color: rgb(50, 150, 175);
+            }
+
+            .demo-ruleForm {
+                padding-right: 90px;
+            }
+
+            .forgotpass {
+                background-color: #fff;
+                border: unset;
+                cursor: pointer;
+            }
+
         }
 
     }
-
 }
 </style>

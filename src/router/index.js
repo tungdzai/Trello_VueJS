@@ -25,13 +25,13 @@ const routes = [
   },
 // LoginForm
   {
-    path: '/FormLogin/:FormLogainId',
+    path: '/',
     name: 'FormLogin',
     component: () => import('../components/HW10/FormLogin.vue'),
 
   },
   {
-    path: '/ForgotPass/:ForgotPassId',
+    path: '/ForgotPass',
     name: 'ForgotPass',
     component: () => import('../components/HW10/ForgotPass.vue'),
 
@@ -40,40 +40,24 @@ const routes = [
   
   //admin
 {
-  path: '/BaseLayout/:BaseLayoutId',
+  path: '/BaseLayout',
   name: 'BaseLayout',
   component: () => import('../layouts/BaseLayout.vue'),
-  children:[
-    {
-      path: 'QuanLySanPham',
-      name: 'QuanLySanPham',
-      component: () => import('../views/QuanLySanPham.vue')
-    },
-    {
-      path: 'QuanLyHoaDon',
-      name: 'QuanLyHoaDon',
-      component: () => import('../views/QuanLyHoaDon.vue')
-    },
-    {
-      path: 'BaoCaoThongKe',
-      name: 'BaoCaoThongKe',
-      component: () => import('../views/BaoCaoThongKe.vue')
-    },
-
-  ]
-},
-
-{
-  path: '/FormLogin/:FormLogainId',
-  name: 'FormLogin',
-  component: () => import('../components/HW10/FormLogin.vue'),
-
 },
 {
-  path: '/ForgotPass/:ForgotPassId',
-  name: 'ForgotPass',
-  component: () => import('../components/HW10/ForgotPass.vue'),
-
+  path: '/QuanLySanPham',
+  name: 'QuanLySanPham',
+  component: () => import('../views/QuanLySanPham.vue')
+},
+{
+  path: '/QuanLyHoaDon',
+  name: 'QuanLyHoaDon',
+  component: () => import('../views/QuanLyHoaDon.vue')
+},
+{
+  path: '/BaoCaoThongKe',
+  name: 'BaoCaoThongKe',
+  component: () => import('../views/BaoCaoThongKe.vue')
 },
 
 ]

@@ -4,12 +4,16 @@
         <div class="frmWrap">
             <div class="LogoWrap">
                 <span> <img src="../../assets/images/logoflixgo.png" alt=""></span>
+                <div class="subWrap">
+                    <p>Chưa có tài khoản ?</p>
+                    <span @click="sub">Đăng ký</span>
+                </div>
             </div>
             <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" label-width="120px" class="demo-ruleForm">
                 <el-form-item prop="email" label="Email" :rules="[
-      { required: true, message: 'Email không được để trống !', trigger: 'blur' },
-      { type: 'email', message: 'Email chưa đúng định dạng !', trigger: ['blur', 'change'] }
-    ]">
+                  { required: true, message: 'Email không được để trống !', trigger: 'blur' },
+                  { type: 'email', message: 'Email chưa đúng định dạng !', trigger: ['blur', 'change'] }
+                ]">
                     <el-input v-model="ruleForm.email" placeholder="Email..."></el-input>
                 </el-form-item>
 
@@ -76,6 +80,11 @@ export default {
             this.$router.push({
                 name: 'ForgotPass'
             })
+        },
+        sub() {
+            this.$router.push({
+                name: 'SubForm'
+            })
         }
     }
 }
@@ -107,6 +116,20 @@ export default {
                 img {
                     margin: 20px;
                     width: 50%;
+                }
+
+                .subWrap {
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 20px;
+
+                    p {
+                        margin-right: 10px;
+                    }
+
+                    span {
+                        cursor: pointer;
+                    }
                 }
 
             }

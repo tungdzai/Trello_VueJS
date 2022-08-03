@@ -106,10 +106,12 @@ export default {
                 img {
                     width: 50%;
                 }
-                p{
-                   color: rgb(204, 197, 197);
+
+                p {
+                    color: rgb(204, 197, 197);
                 }
             }
+
             .demo-ruleForm {
                 padding-right: 90px;
             }

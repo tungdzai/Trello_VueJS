@@ -16,98 +16,32 @@
             </div>
         </div>
     </div>
+    <!-- Sign Up -->
     <div class="form-container sign-up">
-        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
-            <h1>Create Account</h1>
-            <input type="text" placeholder="Name" />
-            <el-form-item prop="email" :rules="[
-                  { required: true, message: 'Please input email address!', trigger: 'blur' },
-                  { type: 'email', message: 'Please input correct email address !', trigger: ['blur', 'change'] }
-                ]">
-                <el-input v-model="ruleForm.email" placeholder="Email"></el-input>
-            </el-form-item>
-            <el-form-item prop="pass">
-                <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="PassWord"></el-input>
-            </el-form-item>
-            <el-form-item prop="checkPass">
-                <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off" placeholder="Confirm"></el-input>
-            </el-form-item>
-            <button type="primary" @click="submitForm('ruleForm')">Sign Up</button>
-        </el-form>
-    </div>
-    <div class="form-container sign-in">
-        <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" class="demo-ruleForm">
-            <h1>Sign in</h1>
-            <el-form-item prop="email" :rules="[
-                  { required: true, message: 'Please input email address!', trigger: 'blur' },
-                  { type: 'email', message: 'Please input correct email address !', trigger: ['blur', 'change'] }
-                ]">
-                <input v-model="ruleForm.email" placeholder="Email" />
-            </el-form-item>
+        <RegistionProject />
 
-            <el-form-item prop="pass">
-                <input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="PassWord" />
-            </el-form-item>
-            <a>Forgot your password?</a>
-            <button @click="submitForm('ruleForm')">Sign In</button>
-        </el-form>
+    </div>
+
+    <!-- Sign in -->
+    <div class="form-container sign-in">
+        <SignInProject />
     </div>
 </div>
 </template>
 
 <script>
+import RegistionProject from './RegistionProject.vue'
+import SignInProject from './SignInProject.vue'
 export default {
+    components: {
+        RegistionProject,
+        SignInProject
+    },
     data() {
-        var validatePass = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('Please input the password !'));
-            } else {
-                if (this.ruleForm.checkPass !== '') {
-                    this.$refs.ruleForm.validateField('checkPass');
-                }
-                callback();
-            }
-        };
-        var validatePass2 = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('Please input the password again'));
-            } else if (value !== this.ruleForm.pass) {
-                callback(new Error('Two inputs don\'t match!'));
-            } else {
-                callback();
-            }
-        };
         return {
-            ruleForm: {
-                pass: '',
-                checkPass: '',
-                email: ''
-            },
-            rules: {
-                pass: [{
-                    validator: validatePass,
-                    trigger: 'blur'
-                }],
-                checkPass: [{
-                    validator: validatePass2,
-                    trigger: 'blur'
-                }],
-            },
             signIn: false,
         };
     },
-    methods: {
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    alert('Đăng nhập thành công ');
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-        },
-    }
 }
 </script>
 
@@ -207,13 +141,6 @@ span {
     font-size: 12px;
 }
 
-a {
-    color: #333;
-    font-size: 14px;
-    text-decoration: none;
-    margin: 15px 0;
-}
-
 button {
     border-radius: 20px;
     border: 1px solid #ff4b2b;
@@ -240,32 +167,11 @@ button.ghost {
     border-color: #ffffff;
 }
 
-form {
-    position: absolute;
-    top: 0;
-    background-color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    padding: 90px 60px;
-    text-align: center;
-
-    input {
-        background-color: #eee;
-        border: none;
-        padding: 12px 30px;
-        margin: 8px 0;
-        width: calc(100% - 30px);
-        border-radius: 15px;
-    }
-
-}
-
 .social-container {
     margin: 20px 0;
     display: flex;
 }
+
 .social-container a {
     border: 1px solid #dddddd;
     border-radius: 50%;

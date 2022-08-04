@@ -1,5 +1,5 @@
 <template>
-<div>
+<div >
     <div class="sidebar" :class="isOpened ? 'open' : ''" :style="cssVars">
         <div class="logo-details" style="margin: 6px 14px 0 14px;">
             <img v-if="menuLogo" :src="menuLogo" alt="menu-logo" class="menu-logo icon">
@@ -37,7 +37,7 @@
                     <img v-if="profileImg" :src="profileImg" alt="profileImg">
                     <i v-else class="bx bxs-user-rectangle" />
                 </div>
-                <i v-if="isExitButton" class="bx bx-log-out" id="log_out" @click.stop="$emit('button-exit-clicked')" />
+                <i v-if="isExitButton" class="bx bx-log-out" id="log_out" @click="signout" />
             </div>
         </div>
     </div>
@@ -53,11 +53,11 @@
                 <el-dropdown>
                     <el-avatar src="https://24s.vn/anh-dai-dien-cho-facebook-de-thuong/imager_3918.jpg" />
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item style="padding:0 10px" @click="account">Thông tin tài khoản</el-dropdown-item>
+                        <el-dropdown-item style="padding:0 10px" @click="accountInfo">Thông tin tài khoản</el-dropdown-item>
                         <el-dropdown-item style="padding:0 10px">Đổi mật khẩu</el-dropdown-item>
                         <el-dropdown-item style="padding:0 10px">Cấu hình</el-dropdown-item>
                         <el-dropdown-item style="padding:0 10px">
-                            <p> Đăng xuất</p>
+                            <p @click="signout"> Đăng xuất</p>
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -157,7 +157,7 @@ export default {
             type: Boolean,
             default: true,
         },
-        //! Styles
+        // Styles
         bgColor: {
             type: String,
             default: '#11101d',
@@ -229,9 +229,19 @@ export default {
         }
     },
     methods: {
-        account() {
-            this.$router.push({ name: 'accountInFormation' })
+        accountInfo() {
+            this.$router.push({
+                path: 'accountInFormation',
+                query: {
+                    plan: 'info'
+                }
+            })
 
+        },
+        signout() {
+            this.$router.push({
+                path: 'LoginProiect',
+            })
         }
     }
 }
@@ -247,7 +257,13 @@ export default {
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-
+.el-container{
+    background-color: #e9ecef;
+    height: 100vh;
+}
+.adminWrap{
+    height: 100vh;
+}
 body {
     transition: all 0.5s ease;
 }

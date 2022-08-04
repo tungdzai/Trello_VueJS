@@ -17,23 +17,40 @@
         </div>
     </div>
     <div class="form-container sign-up">
-        <form action="#">
+        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
             <h1>Create Account</h1>
             <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <input type="password" placeholder="Confirm" />
-            <button>Sign Up</button>
-        </form>
+            <el-form-item prop="email" :rules="[
+                  { required: true, message: 'Please input email address!', trigger: 'blur' },
+                  { type: 'email', message: 'Please input correct email address !', trigger: ['blur', 'change'] }
+                ]">
+                <el-input v-model="ruleForm.email" placeholder="Email"></el-input>
+            </el-form-item>
+            <el-form-item prop="pass">
+                <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="PassWord"></el-input>
+            </el-form-item>
+            <el-form-item prop="checkPass">
+                <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off" placeholder="Confirm"></el-input>
+            </el-form-item>
+            <button type="primary" @click="submitForm('ruleForm')">Sign Up</button>
+        </el-form>
     </div>
     <div class="form-container sign-in">
-        <form action="#">
+        <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" class="demo-ruleForm">
             <h1>Sign in</h1>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <a href="#">Forgot your password?</a>
-            <button>Sign In</button>
-        </form>
+            <el-form-item prop="email" :rules="[
+                  { required: true, message: 'Please input email address!', trigger: 'blur' },
+                  { type: 'email', message: 'Please input correct email address !', trigger: ['blur', 'change'] }
+                ]">
+                <input v-model="ruleForm.email" placeholder="Email" />
+            </el-form-item>
+
+            <el-form-item prop="pass">
+                <input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="PassWord" />
+            </el-form-item>
+            <a>Forgot your password?</a>
+            <button @click="submitForm('ruleForm')">Sign In</button>
+        </el-form>
     </div>
 </div>
 </template>
@@ -41,10 +58,55 @@
 <script>
 export default {
     data() {
+        var validatePass = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('Please input the password !'));
+            } else {
+                if (this.ruleForm.checkPass !== '') {
+                    this.$refs.ruleForm.validateField('checkPass');
+                }
+                callback();
+            }
+        };
+        var validatePass2 = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('Please input the password again'));
+            } else if (value !== this.ruleForm.pass) {
+                callback(new Error('Two inputs don\'t match!'));
+            } else {
+                callback();
+            }
+        };
         return {
+            ruleForm: {
+                pass: '',
+                checkPass: '',
+                email: ''
+            },
+            rules: {
+                pass: [{
+                    validator: validatePass,
+                    trigger: 'blur'
+                }],
+                checkPass: [{
+                    validator: validatePass2,
+                    trigger: 'blur'
+                }],
+            },
             signIn: false,
-
-        }
+        };
+    },
+    methods: {
+        submitForm(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    alert('Đăng nhập thành công ');
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
+        },
     }
 }
 </script>
@@ -103,7 +165,7 @@ export default {
         }
 
         .overlay-left {
-            padding: 70px 150px ;
+            padding: 70px 150px;
             @include overlays(-20%);
         }
 
@@ -192,7 +254,7 @@ form {
     input {
         background-color: #eee;
         border: none;
-        padding: 12px 35px;
+        padding: 12px 30px;
         margin: 8px 0;
         width: calc(100% - 30px);
         border-radius: 15px;
@@ -204,7 +266,6 @@ form {
     margin: 20px 0;
     display: flex;
 }
-
 .social-container a {
     border: 1px solid #dddddd;
     border-radius: 50%;

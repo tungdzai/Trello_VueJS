@@ -53,7 +53,7 @@
                 <el-dropdown>
                     <el-avatar src="https://24s.vn/anh-dai-dien-cho-facebook-de-thuong/imager_3918.jpg" />
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item style="padding:0 10px">Thông tin tài khoản</el-dropdown-item>
+                        <el-dropdown-item style="padding:0 10px" @click="account">Thông tin tài khoản</el-dropdown-item>
                         <el-dropdown-item style="padding:0 10px">Đổi mật khẩu</el-dropdown-item>
                         <el-dropdown-item style="padding:0 10px">Cấu hình</el-dropdown-item>
                         <el-dropdown-item style="padding:0 10px">
@@ -66,7 +66,7 @@
         <!-- main -->
         <el-main class="main">
             <slot>
-                <router-view />
+                <router-view/>
             </slot>
         </el-main>
     </el-container>
@@ -226,6 +226,12 @@ export default {
     watch: {
         isOpened() {
             window.document.body.style.paddingLeft = this.isOpened && this.isPaddingLeft ? this.menuOpenedPaddingLeftBody : this.menuClosedPaddingLeftBody
+        }
+    },
+    methods: {
+        account() {
+            this.$router.push({ name: 'accountInFormation' })
+
         }
     }
 }

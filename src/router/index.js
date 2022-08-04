@@ -5,24 +5,24 @@ Vue.use(VueRouter)
 
 const routes = [
 
-  {
-    path: '/users/:userId',
-    name: 'user',
-    component: () => import('../views/UserView.vue'),
-    children:[
-      {
-        path: 'profile',
-        name: 'userProfile',
-        component: () => import('../views/ProfileView.vue')
-      },
-      {
-        path: 'post',
-        name: 'userPost',
-        component: () => import('../views/PostView.vue')
-      },
+  // {
+  //   path: '/users/:userId',
+  //   name: 'user',
+  //   component: () => import('../views/UserView.vue'),
+  //   children:[
+  //     {
+  //       path: 'profile',
+  //       name: 'userProfile',
+  //       component: () => import('../views/ProfileView.vue')
+  //     },
+  //     {
+  //       path: 'post',
+  //       name: 'userPost',
+  //       component: () => import('../views/PostView.vue')
+  //     },
 
-    ]
-  },
+  //   ]
+  // },
   // HW01
   {
     path: '/HW01',
@@ -85,19 +85,14 @@ const routes = [
 
 
 {
-  path: '/LoginRegiston',
-  name: 'LoginRegiston',
-  component: () => import('../views/LoginRegiston.vue')
+  path: '/LoginProiect',
+  name: 'LoginProiect',
+  component: () => import('../layouts/LoginProiect.vue')
 },
 {
   path: '/AdminLayout',
   name: 'AdminLayout',
   component: () => import('../layouts/AdminLayout.vue')
-},
-{
-  path: '/Content',
-  name: 'Content',
-  component: () => import('../views/Content.vue')
 },
 {
   path: '/accountInFormation',

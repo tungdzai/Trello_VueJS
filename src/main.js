@@ -3,7 +3,8 @@ import App from './App.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
-import { Bar } from 'vue-chartjs/legacy'
+import store from './store'
+
 
 
 Vue.use(ElementUI);
@@ -11,6 +12,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
-  Bar,
+  store,
   render: h => h(App)
 }).$mount('#app')

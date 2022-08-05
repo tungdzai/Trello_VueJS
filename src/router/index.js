@@ -9,12 +9,7 @@ const routes = [
   //   path: '/users/:userId',
   //   name: 'user',
   //   component: () => import('../views/UserView.vue'),
-  //   children:[
-  //     {
-  //       path: 'profile',
-  //       name: 'userProfile',
-  //       component: () => import('../views/ProfileView.vue')
-  //     },
+  //   c
   //     {
   //       path: 'post',
   //       name: 'userPost',
@@ -83,11 +78,11 @@ const routes = [
 },
 
 
-
+// pro
 {
-  path: '/LoginProiect',
-  name: 'LoginProiect',
-  component: () => import('../layouts/LoginProiect.vue')
+  path: '/LoginProject',
+  name: 'LoginProject',
+  component: () => import('../layouts/LoginProject.vue')
 },
 {
   path: '/AdminLayout',
@@ -103,6 +98,21 @@ const routes = [
   path: '/ThucHanh2',
   name: 'ThucHanh2',
   component: () => import('../components/HW01/ThucHanh2.vue')
+},
+{
+  path: '/phone',
+  name: 'phoneNumber',
+  component: () => import('../views/phone.vue')
+},
+{
+  path: '/VueX',
+  name: 'VueX01',
+  component: () => import('../components/Unit07/VueX01.vue'),
+},
+{
+  path: '/VueX',
+  name: 'VueX02',
+  component: () => import('../components/Unit07/VueX02.vue'),
 },
 ]
 

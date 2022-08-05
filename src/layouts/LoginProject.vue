@@ -5,7 +5,7 @@
 <script>
 import LoginRegiston from '../views/LoginRegiston.vue';
 export default {
-    name: 'LoginProiect',
+    name: 'LoginProject',
     components: {
         LoginRegiston
     }

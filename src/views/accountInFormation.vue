@@ -4,7 +4,7 @@
         <template #header>
             <span class="user">Thông tin tài khoản</span>
         </template>
-        <div>
+        <div class="accountinfoWrap">
             <div class="info infoWrap">
                 <div class="info_left">
                     <div class="info_left_acc">
@@ -229,7 +229,7 @@
                     <span class="info_title">Số điện thoại và mail</span>
                     <div class="list_info">
                         <div class="list_item">
-                            <div class="info">
+                            <div class="info  info_item">
                                 <img src="	https://frontend.tikicdn.com/_desktop-next/static/img/account/phone.png" alt="">
                                 <div class="detail">
                                     <span>Số điện thoại</span>
@@ -242,7 +242,7 @@
                             </div>
                         </div>
                         <div class="list_item">
-                            <div class="info">
+                            <div class="info info_item">
                                 <img src="	https://frontend.tikicdn.com/_desktop-next/static/img/account/email.png" alt="">
                                 <div class="detail">
                                     <span>Địa chỉ Email</span>
@@ -258,7 +258,7 @@
                     <span class="info_title">Bảo mật</span>
                     <div class="list_info">
                         <div class="list_item">
-                            <div class="info">
+                            <div class="info  info_item">
                                 <img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/lock.png" alt="">
                                 <div class="detail">
                                     <span>Đổi mật khẩu</span>
@@ -273,7 +273,7 @@
                     <span class="info_title">Liên kết mạng xã hội</span>
                     <div class="list_info">
                         <div class="list_item">
-                            <div class="info">
+                            <div class="info  info_item">
                                 <img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/facebook.png" alt="">
                                 <div class="detail">
                                     <span>Facebook</span>
@@ -285,7 +285,7 @@
                             </div>
                         </div>
                         <div class="list_item">
-                            <div class="info">
+                            <div class="info  info_item">
                                 <img src="		https://frontend.tikicdn.com/_desktop-next/static/img/account/google.png" alt="">
                                 <div class="detail">
                                     <span>Google</span>
@@ -324,10 +324,14 @@ export default {
 <style lang="scss" scoped>
 .user {
     color: #fff;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 24px;
     font-weight: 400;
 }
+.el-radio-group{
+    display: flex;
+}
+
 .info {
     display: flex;
     background-color: #e9ecef;
@@ -433,6 +437,7 @@ export default {
                 }
 
                 .input_birthday {
+                    display: flex;
                     select {
                         width: 100px;
                         border: 1px solid rgb(204, 204, 204);
@@ -498,7 +503,8 @@ export default {
                 width: 100%;
                 padding: 19px 0px;
 
-                .info {
+                .info_item {
+                    background-color: #fff;
 
                     img {
                         width: 24px;

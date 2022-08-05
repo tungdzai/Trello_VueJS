@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="form-container sign-up">
-        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
+        <!-- <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
             <h1>Create Account</h1>
             <input type="text" placeholder="Name" />
             <el-form-item prop="email" :rules="[
@@ -32,7 +32,19 @@
             <el-form-item prop="checkPass">
                 <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off" placeholder="Confirm"></el-input>
             </el-form-item>
-            <button type="primary" @click="submitForm('ruleForm')">Sign Up</button>
+            <el-button type="primary" @click="submitForm('ruleForm')">Sign Up</el-button>
+
+        </el-form> -->
+        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+            <el-form-item label="Password" prop="pass">
+                <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="Confirm" prop="checkPass">
+                <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
+            </el-form-item>
         </el-form>
     </div>
     <div class="form-container sign-in">
@@ -44,12 +56,11 @@
                 ]">
                 <input v-model="ruleForm.email" placeholder="Email" />
             </el-form-item>
-
             <el-form-item prop="pass">
                 <input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="PassWord" />
             </el-form-item>
             <a>Forgot your password?</a>
-            <button @click="submitForm('ruleForm')">Sign In</button>
+            <el-button @click="submitForm('ruleForm')">Sign In</el-button>
         </el-form>
     </div>
 </div>
@@ -266,6 +277,7 @@ form {
     margin: 20px 0;
     display: flex;
 }
+
 .social-container a {
     border: 1px solid #dddddd;
     border-radius: 50%;

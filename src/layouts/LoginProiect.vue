@@ -1,6 +1,7 @@
 <template>
-<LoginRegiston/>
+<LoginRegiston />
 </template>
+
 <script>
 import LoginRegiston from '../views/LoginRegiston.vue';
 export default {

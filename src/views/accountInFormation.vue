@@ -324,7 +324,7 @@ export default {
 <style lang="scss" scoped>
 .user {
     color: #fff;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 24px;
     font-weight: 400;
 }

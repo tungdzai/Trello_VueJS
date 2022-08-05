@@ -104,6 +104,11 @@ const routes = [
   name: 'ThucHanh2',
   component: () => import('../components/HW01/ThucHanh2.vue')
 },
+{
+  path: '/phone',
+  name: 'phoneNumber',
+  component: () => import('../views/phone.vue')
+},
 ]
 
 

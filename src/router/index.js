@@ -114,6 +114,11 @@ const routes = [
   name: 'VueX02',
   component: () => import('../components/Unit07/VueX02.vue'),
 },
+{
+  path: '/ListProducts',
+  name: 'ListProducts',
+  component: () => import('../components/Unit07/HW01/ListProducts.vue'),
+},
 ]
 
 

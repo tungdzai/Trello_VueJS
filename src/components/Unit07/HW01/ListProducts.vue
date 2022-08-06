@@ -46,7 +46,8 @@ export default {
     },
     computed: {
         ...mapState([
-            'products'
+            'products',
+            'cartProducts'
         ]),
     },
     methods: {
@@ -63,8 +64,30 @@ export default {
             if (product.quantity === 0) {
                 alert('Sản phẩm hết hàng')
                 return false;
+
+            } else {
+                let inCart = this.cartProducts.filter((cartProduct) => {
+                    return cartProduct.id === product.id
+                })
+                if (inCart.length > 0) {
+                    let indexInCart = this.cartProducts.findIndex((cartProduct) => {
+                        return cartProduct.id === product.id
+                    })
+                    if (indexInCart !== -1) {
+                        this.cartProducts[indexInCart].quantity = parseInt(this.cartProducts[indexInCart].quantity) + 1
+                        console.log(product)
+                    }
+                } else {
+                    console.log(product)
+                    this.cartProducts.push({
+                        ...product,
+                        quantity: 1,
+                        
+                    })
+                }
             }
-        }
+
+        },
 
     }
 

@@ -14,12 +14,12 @@
         </div>
         <div class="actions">
             <input class="quantity_input" type="number" v-model="product.quantity">
-            <button class="delete">Xoá</button>
-            <!-- @click="delete(product, index)" -->
+            <button class="delete" @click="deleteProduct">Xoá</button>
         </div>
     </div>
     <div class="cartTotal">
-        Tổng tiền: {{total}}
+        Tổng tiền:
+        {{sum}}
     </div>
 </div>
 </template>
@@ -34,6 +34,15 @@ export default {
         ...mapState([
             'cartProducts'
         ]),
+        sum() {
+            let result = 0;
+            this.cartProducts.map((product) => {
+                result += product.quantity * product.price
+            })
+            return this.formatPrice(result)
+
+        }
+
     },
     methods: {
         formatPrice(price) {
@@ -45,7 +54,13 @@ export default {
             }
             return name
         },
-    }
+        deleteProduct(index) {
+             this.cartProducts.splice(index, 1)
+          
+
+        }
+
+    },
 }
 </script>
 

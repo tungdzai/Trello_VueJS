@@ -50,7 +50,27 @@ const store = new Vuex.Store({
       }
     ],
     cartProducts:[
+     
     ],
+    ListProducts:[
+      {
+        id:1,
+        name:"Bánh bao",
+        price:500000,
+        quantity:56,
+        
+      }
+      ,{
+        id:2,
+        name:"Bánh bao",
+        price:500000,
+        quantity:0,
+        
+      }
+    ],
+    productInput:{
+
+    }
   },
   getters:{
     doneTodos: state => {

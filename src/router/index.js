@@ -119,6 +119,11 @@ const routes = [
   name: 'ListProducts',
   component: () => import('../components/Unit07/HW01/ListProducts.vue'),
 },
+{
+  path: '/ExerciseProduct',
+  name: 'ExerciseProduct',
+  component: () => import('../components/Unit07/HW02/ExerciseProduct.vue'),
+},
 ]
 
 

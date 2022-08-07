@@ -4,17 +4,17 @@
     <div class="cart_empty" v-if="cartProducts.length === 0">
         Không có sản phẩm nào được thêm vào giỏ
     </div>
-    <div class="cartProduct" v-for="product in cartProducts" :key="product.id">
+    <div class="cartProduct" v-for="cartProduct in cartProducts" :key="cartProduct.id">
         <div class="cartProduct_name">
-            <img :src="product.image" alt="">
+            <img :src="cartProduct.image" alt="">
             <div>
-                <p>{{formatProductName(product.name)}}</p>
-                <span>{{formatPrice(product.price)}}</span>
+                <p>{{formatProductName(cartProduct.name)}}</p>
+                <span>{{formatPrice(cartProduct.price)}}</span>
             </div>
         </div>
         <div class="actions">
-            <input class="quantity_input" type="number" v-model="product.quantity">
-            <button class="delete" @click="deleteProduct">Xoá</button>
+            <input class="quantity_input" type="number" v-model="cartProduct.quantity">
+            <button class="delete" @click="deleteProduct(cartProduct)">Xoá</button>
         </div>
     </div>
     <div class="cartTotal">
@@ -36,8 +36,8 @@ export default {
         ]),
         sum() {
             let result = 0;
-            this.cartProducts.map((product) => {
-                result += product.quantity * product.price
+            this.cartProducts.map((cartProduct) => {
+                result += cartProduct.quantity * cartProduct.price
             })
             return this.formatPrice(result)
 
@@ -55,12 +55,17 @@ export default {
             return name
         },
         deleteProduct(index) {
-             this.cartProducts.splice(index, 1)
-          
+            console.log(this.cartProducts)
+            for (let i = 0; i < this.cartProducts.length; i++) {
+                if (index.id === this.cartProducts[i].id) {
+                    console.log(this.cartProducts[i].quantity)
+                    this.cartProducts[i].quantity = this.cartProducts[i].quantity - 1
+                }
 
-        }
+            }
 
-    },
+        },
+    }
 }
 </script>
 

@@ -17,40 +17,75 @@
             <td>
                 <p class="text_input">{{product.name}}</p>
             </td>
-            <td>{{product.price}}</td>
-            <td class="text_input">{{product.quantity}}</td>
+            <td>{{formatPrice(product.price)}}</td>
+            <td class="text_input">{{product.quantily}}</td>
             <td class="text_input">
-                <p class="textGreen" v-if="product.quantity >0">Còn hàng</p>
+                <p class="textGreen" v-if="product.quantily>0">Còn hàng</p>
                 <p class="textRed" v-else>Hết hàng</p>
             </td>
             <td class="btnWrap">
-                <button class="editButton" @click="editProduct(product)">Sửa</button>
-                <button class="deleteButton" @click="deleteProduct(index)">Xóa</button>
+                <button class="editButton" @click="clickedit(product)">Sửa</button>
+                <button class="deleteButton" @click="clickdelete(product)">Xóa</button>
             </td>
         </tr>
 
     </table>
+    <div class="paginationWrap">
+        <div class="pagination">
+            <!-- {{ total === 0 ? 'Hiển thị 0 - 0 trên tổng 0 (0 trang)' :
+                `Hiển thị ${from} - ${to} trên tổng ${total} (${lastPage} trang)`}} -->
+        </div>
+        <div class="paginationbtn">
+            <button class="button_pagination">
+                <img src="../../../assets/icons/back.png" alt="">
+            </button>
+            <button class="button_pagination">
+                <img src="../../../assets/icons/next.png" alt="">
+            </button>
+        </div>
+    </div>
 </div>
 </template>
 
 <script>
 import {
-    mapState
+    mapState,
+    mapMutations
 } from 'vuex'
 export default {
     name: 'ProductList',
     computed: {
         ...mapState([
             'ListProducts',
-
         ]),
     },
+    methods: {
+        formatPrice(price) {
+            return price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") + ' đ'
+        },
+        clickdelete(item) {
+            for (let i = 0; i < this.ListProducts.length; i++) {
+                if (item.id === this.ListProducts[i].id) {
+                    this.ListProducts.splice(i, 1)
+                }
+            }
+        },
+        ...mapMutations([
+            'edit',
+        ]),
+        clickedit(itemEdit) {
+            this.edit = itemEdit
+            console.log(this.edit)
+        }
+    },
+
 }
 </script>
 
 <style lang="scss">
 .ProductList {
     margin-left: 50px;
+
     table {
         border: 1px solid #a5a7aa;
         border-spacing: 0;
@@ -66,20 +101,24 @@ export default {
         }
 
         td {
-           
+            width: 100px;
             border-right: 1px solid #a5a7aa;
             padding: 15px;
             font-size: 14px;
-            .textGreen{
+
+            .textGreen {
                 color: rgb(114, 190, 114);
             }
-             .textRed{
+
+            .textRed {
                 color: rgb(226, 116, 116);
             }
-            .text_input{
-             text-align: center;
+
+            .text_input {
+                text-align: center;
             }
-            .editButton{
+
+            .editButton {
                 background: #f2994a;
                 border: none;
                 font-size: 13px;
@@ -91,8 +130,9 @@ export default {
                 cursor: pointer;
                 margin-right: 5px;
             }
-            .deleteButton{
-                 background: rgb(223, 45, 45);
+
+            .deleteButton {
+                background: rgb(223, 45, 45);
                 border: none;
                 font-size: 13px;
                 font-weight: 600;
@@ -105,12 +145,42 @@ export default {
 
             }
         }
-        .btnWrap{
+
+        .btnWrap {
             display: flex;
+            width: 140px;
         }
-        .input_id{
-            text-align:left
+
+        .input_id {
+            text-align: left
         }
+    }
+
+    .paginationWrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0;
+
+        .paginationbtn {
+            display: flex;
+
+            button {
+                cursor: pointer;
+                padding: 0;
+                margin-left: 10px;
+                border: none;
+                background-color: #fff;
+
+                img {
+                    width: 100%;
+                    height: 28px;
+
+                }
+            }
+
+        }
+
     }
 }
 </style>

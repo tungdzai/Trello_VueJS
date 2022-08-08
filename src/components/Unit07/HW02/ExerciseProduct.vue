@@ -15,7 +15,7 @@ export default {
         ProductList
         
     }
-}
+} 
 </script>
 
 <style lang="scss" scoped>

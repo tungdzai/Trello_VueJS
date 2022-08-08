@@ -5,32 +5,98 @@
     <div class="input_text">
         <span>Tên sản phẩm </span>
         <br>
-        <input type="text" placeholder="Nhập tên sản phẩm">
-        <div class="errorname">1</div>
+        <input type="text" placeholder="Nhập tên sản phẩm" v-model="productInput.name">
+        <div class="error">{{errors.errorname}}</div>
     </div>
     <div class="input_text">
         <span>Đơn giá </span>
         <br>
-        <input type="text" placeholder="Nhập đơn giá sản phẩm">
-        <div class="errorprice">1</div>
+        <input type="number" placeholder="Nhập đơn giá sản phẩm" v-model="productInput.price">
+        <div class="error">{{errors.errorprice}}</div>
     </div>
     <div class="input_text">
         <span>Số lượng</span>
         <br>
-        <input type="text" placeholder="Nhập số lượng sản phẩm">
-        <div class="errorquantity">1</div>
+        <input type="number" placeholder="Nhập số lượng sản phẩm" v-model="productInput.quantily">
+        <div class="error">{{errors.errorquantily}}</div>
     </div>
     <div class="inputWrap">
-        <button class="create_new">Tạo mới</button>
-        <button class="default">Hủy</button>
+        <button class="create_new" @click="clickAdd">Tạo mới</button>
+        <button class="default" @click="clickremove">Hủy</button>
     </div>
 
 </div>
 </template>
 
 <script>
+import {
+    mapState,
+    mapMutations
+} from 'vuex'
 export default {
-    name: 'ProductForm'
+    name: 'ProductForm',
+    computed: {
+        ...mapState([
+            'ListProducts',
+
+        ]),
+    },
+    data() {
+        return {
+            productInput: {
+                id: Math.floor(Math.random() * 1000000),
+                name: '',
+                price: '',
+                quantily: '',
+            },
+            errors: {
+                errorname: '',
+                errorprice: '',
+                errorquantily: '',
+            },
+            editbuton: '',
+        }
+    },
+
+    methods: {
+
+        clickAdd() {
+            this.ListProducts.push(this.productInput)
+            this.productInput = {
+                id: Math.floor(Math.random() * 100000),
+                name: '',
+                price: '',
+                quantily: '',
+
+            }
+        },
+
+        clickremove() {
+            this.productInput = {
+                id: Math.floor(Math.random() * 100000),
+                name: '',
+                price: '',
+                quantily: '',
+
+            }
+        },
+       
+        ...mapMutations([
+            'edit',
+        ]),
+
+    },
+    watch: {
+        // edit() {
+        //     if (this.edit) {
+        //         this.edit = this.productInput;
+        //         console.log(this.edit)
+        //     } else {
+        //         this.productInput = {}
+        //     }
+        //     console.log(this.edit)
+        // }
+    }
 }
 </script>
 
@@ -50,13 +116,15 @@ export default {
         color: #68c2f2;
         text-align: left;
     }
-    .input_text{
+
+    .input_text {
         margin-bottom: 20px;
         text-align: left;
         padding: 10px;
-        input{
+
+        input {
             width: 100%;
-            margin: 15px 0 ;
+            margin: 15px 0;
             padding: 5px;
             height: 30px;
             border-radius: 10px;
@@ -64,13 +132,16 @@ export default {
             background-color: #d9dce0;
             outline: none;
         }
-        span{
+
+        span {
             font-size: 17px;
         }
     }
-    .inputWrap{
+
+    .inputWrap {
         margin-bottom: 20px;
-        button{
+
+        button {
             height: 40px;
             background-color: #68c2f2;
             font-size: 16px;
@@ -81,6 +152,7 @@ export default {
             margin: 10px;
             color: #fff;
             cursor: pointer;
+            outline: none;
         }
     }
 }

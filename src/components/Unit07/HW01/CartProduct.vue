@@ -58,8 +58,8 @@ export default {
             console.log(this.cartProducts)
             for (let i = 0; i < this.cartProducts.length; i++) {
                 if (index.id === this.cartProducts[i].id) {
-                    console.log(this.cartProducts[i].quantity)
-                    this.cartProducts[i].quantity = this.cartProducts[i].quantity - 1
+                   this.cartProducts.splice(i,1)
+                    
                 }
 
             }

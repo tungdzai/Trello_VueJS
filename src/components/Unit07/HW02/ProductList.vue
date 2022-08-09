@@ -75,7 +75,6 @@ export default {
         ]),
         clickedit(itemEdit) {
             this.edit = itemEdit
-            console.log(this.edit)
         }
     },
 

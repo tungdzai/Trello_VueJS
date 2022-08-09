@@ -5,7 +5,7 @@
     <div class="input_text">
         <span>Tên sản phẩm </span>
         <br>
-        <input type="text" placeholder="Nhập tên sản phẩm" v-model="productInput.name">
+        <input type="text" placeholder="Nhập tên sản phẩm" v-model="productInput.name"  :class="{hasError: errors.errorname.length > 0}">
         <div class="error">{{errors.errorname}}</div>
     </div>
     <div class="input_text">
@@ -54,7 +54,6 @@ export default {
                 errorprice: '',
                 errorquantily: '',
             },
-            editbuton: '',
         }
     },
 
@@ -80,23 +79,12 @@ export default {
 
             }
         },
-       
+
         ...mapMutations([
             'edit',
         ]),
 
     },
-    watch: {
-        // edit() {
-        //     if (this.edit) {
-        //         this.edit = this.productInput;
-        //         console.log(this.edit)
-        //     } else {
-        //         this.productInput = {}
-        //     }
-        //     console.log(this.edit)
-        // }
-    }
 }
 </script>
 

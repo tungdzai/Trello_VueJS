@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import home from './modules/home'
+import about  from './modules/about'
 
 Vue.use(Vuex)
 
@@ -74,6 +76,14 @@ const store = new Vuex.Store({
       state.count += input.number
       console.log(input.name)
     },
+    edit(state){
+      state.productEdit=this.itemEdit
+      console.log(this.productEdit)
+    }
+  },
+  modules: {
+    home,
+    about
   }
 })
 

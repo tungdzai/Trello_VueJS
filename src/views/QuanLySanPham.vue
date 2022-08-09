@@ -4,7 +4,11 @@
         <template #header>
             Quán lý sản phẩm
         </template>
-        <el-table :data="tableData" style="width: 100%">
+        <div class="btnWrap">
+            <p class="title">{{title}}</p>
+            <button class="btn" @click="clickbtn()">Click</button>
+        </div>
+        <el-table :data="sanpham" style="width: 100%">
             <el-table-column prop="date" label="Ngày nhập" width="180">
             </el-table-column>
             <el-table-column prop="name" label="Tên sản phẩm" width="280">
@@ -29,46 +33,30 @@
 
 <script>
 import BaseLayout from '../layouts/BaseLayout.vue'
+import { mapState , mapMutations} from 'vuex'
 export default {
     name: 'QuanLySanPham',
     components: {
         BaseLayout
     },
+    computed: {
+      ...mapState('about', [
+       'sanpham',
+       'title'
+      ]),
+    },
+    methods: {
+      ...mapMutations('about', [
+        'updatetitle'
+      ]),
+      clickbtn(){
+        this.updatetitle();
+        
+      }
+    },
     data() {
         return {
-            tableData: [{
-                    date: '28-7-2022',
-                    name: 'Quần Jeans Wash Scratch Simwood Denim 1579',
-                    inputmoney: '595,000₫',
-                    inputnumber:'3000',
-                    outputnumber:'2400',
-                    outputmoney:"900,000đ"
-                },
-                {
-                    date: '28-7-2022',
-                    name: 'Áo Thun Overspray Stencil Shapes 1568',
-                    inputmoney: '295,000₫',
-                    inputnumber:'3000',
-                    outputnumber:'2400',
-                    outputmoney:"900,000đ",
-                },
-                {
-                    date: '28-7-2022',
-                    name: 'Quần Shorts Light Blue Ripped Slimfit Simwood Denim 1547',
-                    inputmoney: '395,000₫ ',
-                    inputnumber:'3000',
-                    outputnumber:'2400',
-                    outputmoney:"900,000đ"
-                },
-                {
-                    date: '28-7-2022',
-                    name: 'Túi Xách 1137',
-                    inputmoney: '187,500₫',
-                    inputnumber:'3000',
-                    outputnumber:'2400',
-                    outputmoney:"900,000đ"
-                }
-            ]
+           
         }
     },
 }

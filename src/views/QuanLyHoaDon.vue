@@ -4,7 +4,7 @@
         <template #header>
             Quản lý hóa đơn
         </template>
-        <el-table :data="tableData" style="width: 100%">
+        <el-table :data="hoadon" style="width: 100%">
             <el-table-column prop="date" label="Date" width="180">
             </el-table-column>
             <el-table-column prop="name" label="Name" width="180">
@@ -23,32 +23,20 @@
 
 <script>
 import BaseLayout from '../layouts/BaseLayout.vue'
+import { mapState } from 'vuex'
 export default {
     name: 'QuanLyHoaDon',
     components: {
         BaseLayout
     },
     data() {
-        return {
-            tableData: [{
-                date: '2022-15-07',
-                name: 'Áo thun',
-                address: ''
-            }, {
-                date: '2022-15-07',
-                name: 'ÁO sơ mi',
-                address: ''
-            }, {
-                date: '2022-15-07',
-                name: 'Quần Jean',
-                address: ''
-            }, {
-                date: '2022-15-07',
-                name: 'Dép LV',
-                address: ''
-            }]
-        }
     },
+    computed: {
+      ...mapState('home', [
+       'hoadon'
+      ]),
+    },
+
 }
 </script>
 

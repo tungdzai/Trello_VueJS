@@ -2,15 +2,18 @@
 <div>
     <AdminLayout>
         <template #header>
-            <span class="user">Cập nhật số điện thoại</span>
+            <span class="user">Đổi mật khẩu</span>
         </template>
-        <div class="phoneWrap">
-            <div class="phoneinfo">
+        <div class="passWrap">
+            <div class="passinfo">
                 <div class="info_number">
-                    <span class="text">Số điện thoại</span>
-                    <div class="inputphoneWrap">
+                    <span class="text">Đổi mật khẩu</span>
+                    <div class="inputpassWrap">
                         <img src="	https://frontend.tikicdn.com/_desktop-next/static/img/account/phone.png" alt="">
-                        <input type="text" placeholder="Nhập số điện thoại">
+                        <input type="password" placeholder="Nhập mật khẩu hiện tại">
+                        <input type="password" placeholder="Nhập mật khẩu mới"/>
+                        <input type="password" placeholder="Nhập mật lại mật khẩu mới"/>
+
                         <button>Lưu thay đổi</button>
                     </div>
                 </div>
@@ -23,7 +26,7 @@
 <script>
 import AdminLayout from '../layouts/AdminLayout.vue'
 export default {
-    name: 'phoneUpdate',
+    name: 'passUpdate',
     components: {
         AdminLayout
     }
@@ -38,7 +41,7 @@ export default {
     font-weight: 400;
 }
 
-.phoneWrap {
+.passWrap {
     background-color: #fff;
     width: 50%;
     margin: 0 auto;
@@ -46,7 +49,7 @@ export default {
     border-radius: 10px;
     margin-top: 20px;
 
-    .phoneinfo {
+    .passinfo {
         padding: 20px;
         .info_number {
             border: 1px solid #e9ecef;
@@ -57,7 +60,7 @@ export default {
             border-radius: 10px;
 
 
-            .inputphoneWrap {
+            .inputpassWrap {
                 display: flex;
                 position: relative;
                 flex-wrap: wrap;

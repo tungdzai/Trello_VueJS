@@ -54,7 +54,7 @@
                     <el-avatar src="https://24s.vn/anh-dai-dien-cho-facebook-de-thuong/imager_3918.jpg" />
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item style="padding:0 10px">
-                            <div @click="accountInfo()">Thông tin tài khoản</div>
+                            <div @click="accountInfo()">Tài khoản của tôi</div>
                         </el-dropdown-item>
                         <el-dropdown-item style="padding:0 10px">Đổi mật khẩu</el-dropdown-item>
                         <el-dropdown-item style="padding:0 10px">Cấu hình</el-dropdown-item>

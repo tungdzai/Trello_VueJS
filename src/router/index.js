@@ -101,8 +101,18 @@ const routes = [
 },
 {
   path: '/phone',
-  name: 'phoneNumber',
+  name: 'phoneUpdate',
   component: () => import('../views/phone.vue')
+},
+{
+  path: '/email',
+  name: 'emailUpdate',
+  component: () => import('../views/email.vue')
+},
+{
+  path: '/pass',
+  name: 'passUpdate',
+  component: () => import('../views/pass.vue')
 },
 {
   path: '/VueX',

@@ -238,7 +238,7 @@
                             </div>
                             <div class="status">
                                 <span></span>
-                                <button class="button active">Cập nhật</button>
+                                <button class="button active" @click="clickphone">Cập nhật</button>
                             </div>
                         </div>
                         <div class="list_item">
@@ -251,7 +251,7 @@
                             </div>
                             <div class="status">
                                 <span></span>
-                                <button class="button active">Cập nhật</button>
+                                <button class="button active" @click="clickemail">Cập nhật</button>
                             </div>
                         </div>
                     </div>
@@ -266,7 +266,7 @@
                             </div>
                             <div class="status">
                                 <span></span>
-                                <button class="button active">Cập nhật</button>
+                                <button class="button active" @click="clickpass">Cập nhật</button>
                             </div>
                         </div>
                     </div>
@@ -318,6 +318,32 @@ export default {
 
         }
     },
+    methods:{
+        clickphone(){
+             this.$router.push({
+                path: 'phone',
+                query: {
+                    plan: 'update'
+                }
+            })
+        },
+        clickemail(){
+            this.$router.push({
+                path: 'email',
+                query: {
+                    plan: 'update'
+                }
+            })
+        },
+        clickpass(){
+            this.$router.push({
+                path: 'pass',
+                query: {
+                    plan: 'update'
+                }
+            })
+        }
+    }
 }
 </script>
 

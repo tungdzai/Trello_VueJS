@@ -2,15 +2,15 @@
 <div>
     <AdminLayout>
         <template #header>
-            <span class="user">Cập nhật số điện thoại</span>
+            <span class="user">Cập nhật email</span>
         </template>
-        <div class="phoneWrap">
-            <div class="phoneinfo">
+        <div class="emailWrap">
+            <div class="emailinfo">
                 <div class="info_number">
-                    <span class="text">Số điện thoại</span>
-                    <div class="inputphoneWrap">
+                    <span class="text">Email</span>
+                    <div class="inputemailWrap">
                         <img src="	https://frontend.tikicdn.com/_desktop-next/static/img/account/phone.png" alt="">
-                        <input type="text" placeholder="Nhập số điện thoại">
+                        <input type="text" placeholder="Nhập email">
                         <button>Lưu thay đổi</button>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
 <script>
 import AdminLayout from '../layouts/AdminLayout.vue'
 export default {
-    name: 'phoneUpdate',
+    name: 'emailUpdate',
     components: {
         AdminLayout
     }
@@ -38,7 +38,7 @@ export default {
     font-weight: 400;
 }
 
-.phoneWrap {
+.emailWrap {
     background-color: #fff;
     width: 50%;
     margin: 0 auto;
@@ -46,7 +46,7 @@ export default {
     border-radius: 10px;
     margin-top: 20px;
 
-    .phoneinfo {
+    .emailinfo {
         padding: 20px;
         .info_number {
             border: 1px solid #e9ecef;
@@ -57,7 +57,7 @@ export default {
             border-radius: 10px;
 
 
-            .inputphoneWrap {
+            .inputemailWrap {
                 display: flex;
                 position: relative;
                 flex-wrap: wrap;

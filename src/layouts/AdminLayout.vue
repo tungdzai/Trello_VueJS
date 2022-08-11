@@ -1,6 +1,6 @@
 <template>
 <div >
-    <div class="sidebar" :class="isOpened ? 'open' : ''" :style="cssVars">
+    <div class="sidebar" :class="isOpened ? '' : 'open'" :style="cssVars">
         <div class="logo-details" style="margin: 6px 14px 0 14px;">
             <img v-if="menuLogo" :src="menuLogo" alt="menu-logo" class="menu-logo icon">
             <img v-else src="../assets/images/PandaLogo.jpg" alt="" class="bx icon" :class="menuIcon">
@@ -102,11 +102,12 @@ export default {
         },
         menuOpenedPaddingLeftBody: {
             type: String,
-            default: '250px'
+            default: '78px'
+            
         },
         menuClosedPaddingLeftBody: {
             type: String,
-            default: '78px'
+             default: '175px'
         },
         //! Menu items
         menuItems: {
@@ -260,6 +261,9 @@ export default {
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+.main{
+    background-color: #fff;
+}
 .el-container{
     background-color: #e9ecef;
     height: 100vh;
@@ -293,7 +297,7 @@ body {
 }
 
 .sidebar.open {
-    width: 250px;
+    width: 175px;
 }
 
 .sidebar .logo-details {
@@ -479,7 +483,8 @@ body {
 }
 
 .sidebar.open div.profile {
-    width: 250px;
+    width: 175px;
+    background-color:#fff;
 }
 
 .sidebar div .profile-details {
@@ -560,8 +565,8 @@ body {
 }
 
 .sidebar.open~.home-section {
-    left: 250px;
-    width: calc(100% - 250px);
+    left: 175px;
+    width: calc(100% - 175px);
 }
 
 .home-section .text {

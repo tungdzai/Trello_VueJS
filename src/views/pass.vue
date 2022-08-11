@@ -9,11 +9,10 @@
                 <div class="info_number">
                     <span class="text">Đổi mật khẩu</span>
                     <div class="inputpassWrap">
-                        <img src="	https://frontend.tikicdn.com/_desktop-next/static/img/account/phone.png" alt="">
+                        <img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/lock.png" alt="">
                         <input type="password" placeholder="Nhập mật khẩu hiện tại">
-                        <input type="password" placeholder="Nhập mật khẩu mới"/>
-                        <input type="password" placeholder="Nhập mật lại mật khẩu mới"/>
-
+                        <input type="password" placeholder="Nhập mật khẩu mới" />
+                        <input type="password" placeholder="Nhập mật lại mật khẩu mới" />
                         <button>Lưu thay đổi</button>
                     </div>
                 </div>
@@ -51,6 +50,7 @@ export default {
 
     .passinfo {
         padding: 20px;
+
         .info_number {
             border: 1px solid #e9ecef;
             width: 380px;
@@ -58,7 +58,6 @@ export default {
             padding: 15px;
             text-align: left;
             border-radius: 10px;
-
 
             .inputpassWrap {
                 display: flex;
@@ -69,20 +68,20 @@ export default {
                     width: 28px;
                     height: 28px;
                     position: absolute;
-                    top: 8%;
+                    top: 5%;
                     left: 5px;
 
                 }
 
                 input {
-                    border: 1px solid  rgb(196, 196, 207);
+                    border: 1px solid rgb(196, 196, 207);
                     width: 100%;
                     height: 40px;
                     border-radius: 4px;
                     margin: 4px 0px 34px;
                     padding-left: 40px;
                     outline: none;
-                    
+
                 }
 
                 button {

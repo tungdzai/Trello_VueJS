@@ -71,11 +71,6 @@ const routes = [
   name: 'QuanLyHoaDon',
   component: () => import('../views/QuanLyHoaDon.vue')
 },
-{
-  path: '/BaoCaoThongKe',
-  name: 'BaoCaoThongKe',
-  component: () => import('../views/BaoCaoThongKe.vue')
-},
 
 
 // pro
@@ -115,6 +110,11 @@ const routes = [
   component: () => import('../views/pass.vue')
 },
 {
+  path: '/board',
+  name: 'TaskProject',
+  component: () => import('../components/Project/Task.vue')
+},
+{
   path: '/VueX',
   name: 'VueX01',
   component: () => import('../components/Unit07/VueX01.vue'),
@@ -123,6 +123,11 @@ const routes = [
   path: '/VueX',
   name: 'VueX02',
   component: () => import('../components/Unit07/VueX02.vue'),
+},
+{
+  path: '/ThucHanh03',
+  name: 'ThucHanh03',
+  component: () => import('../components/HW01/ThucHanh03.vue'),
 },
 {
   path: '/ListProducts',

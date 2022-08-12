@@ -139,6 +139,12 @@ const routes = [
   name: 'ExerciseProduct',
   component: () => import('../components/Unit07/HW02/ExerciseProduct.vue'),
 },
+
+{
+  path: '/listPr',
+  name: 'listPr',
+  component: () => import('../components/Unit09/listProducts.vue'),
+},
 ]
 
 

@@ -3,11 +3,11 @@
     <draggable class="list_group-box" >
         <div class="box_group" v-for="(value , index ) in list" :key="index" >
             <h3>{{value.title}}</h3>
-            <!-- <draggable class="list_group" :list="value.cards" group="people" >
+            <draggable class="list_group" :list="value.cards" group="people" >
                 <div class="box_group_item" v-for="element in value.cards" :key="element.id">
                     <h3>{{element.title}}</h3>
                 </div>
-            </draggable> -->
+            </draggable>
         </div>
     </draggable>
 </div>

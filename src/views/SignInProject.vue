@@ -1,24 +1,24 @@
 <template>
-
-    <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" class="demo-ruleForm">
-        <h1>Sign In</h1>
-        <el-form-item prop="email" :rules="[
+<el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" class="demo-ruleForm">
+    <h1>Sign In</h1>
+    <el-form-item prop="email" :rules="[
                   { required: true, message: 'Please input email address!', trigger: 'blur' },
                   { type: 'email', message: 'Please input correct email address !', trigger: ['blur', 'change'] }
                 ]">
-            <input v-model="ruleForm.email" placeholder="Email" />
-        </el-form-item>
+        <input v-model="ruleForm.email" placeholder="Email" />
+    </el-form-item>
 
-        <el-form-item prop="pass">
-            <input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="PassWord" />
-        </el-form-item>
-        <p>Forgot your password?</p>
-        <el-button @click="submitForm('ruleForm')">Sign In</el-button>
-    </el-form>
-
+    <el-form-item prop="pass">
+        <input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="PassWord" />
+    </el-form-item>
+    <p>Forgot your password?</p>
+    <el-button @click="submitForm('ruleForm')">Sign In</el-button>
+</el-form>
 </template>
 
 <script>
+import api from '@/api';
+
 export default {
     name: 'SignInProject',
     data() {
@@ -49,8 +49,18 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert('Đăng nhập thành công ');
-                    this.$router.push({ path: 'AdminLayout', query: { plan: 'private' } })
+                    let sigin = {
+                        email: this.ruleForm.email,
+                        password: this.ruleForm.pass,
+                    }
+                    api.login(sigin).then(() => {
+                        this.$router.push({
+                            path: 'AdminLayout',
+                            query: {
+                                plan: 'private'
+                            }
+                        })
+                    })
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -82,6 +92,7 @@ button {
         }
     }
 }
+
 form {
     position: absolute;
     top: 0;
@@ -100,6 +111,7 @@ form {
         margin: 8px 0;
         width: calc(100% - 30px);
         border-radius: 15px;
+        outline: none;
     }
 
 }

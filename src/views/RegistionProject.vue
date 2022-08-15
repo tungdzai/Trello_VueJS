@@ -2,7 +2,7 @@
 <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" class="demo-ruleForm">
     <h1>Create Account</h1>
     <el-form-item prop="name">
-        <input v-model="ruleForm.name"   placeholder="Name"/>
+        <input v-model="ruleForm.name" placeholder="Name" />
     </el-form-item>
     <el-form-item prop="email" :rules="[
                   { required: true, message: 'Please input email address!', trigger: 'blur' },
@@ -23,12 +23,15 @@
 </template>
 
 <script>
+import api from '../api'
 export default {
     name: 'SignInProject',
     data() {
         var validatePass = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('Please input the password !'));
+            } else if (value.length <= 6) {
+                callback(new Error('Password must be more than 6 character!'));
             } else {
                 if (this.ruleForm.checkPass !== '') {
                     this.$refs.ruleForm.validateField('checkPass');
@@ -79,8 +82,15 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert('Đăng kí thành công !');
-                    
+                    let infoLogin = {
+                        name: this.ruleForm.name,
+                        email: this.ruleForm.email,
+                        password: this.ruleForm.pass,
+                    }
+                    api.register(infoLogin).then(() => {
+                        alert('Đăng ký thành công !')
+                    })
+
                 } else {
                     console.log('error submit!!');
                     return false;

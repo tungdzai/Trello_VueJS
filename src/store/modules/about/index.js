@@ -100,30 +100,7 @@ export default {
                 }
             ]
         },
-        {
-            "id": 3,
-            "title": "group 3",
-            "user_id": 110,
-            "index": 1,
-            "cards": [{
-                    "id": 834,
-                    "title": "task 13",
-                    "directory_id": 651,
-                    "index": 0,
-                    "user_id": 110,
-                },
-                {
-                    "id": 835,
-                    "title": "task 14",
-                    "directory_id": 650,
-                    "index": 1,
-                    "user_id": 110,
-                },
-                
-            ]
-        }
     ],
-    setBoards:[]
     },
     getters: {
 

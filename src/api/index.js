@@ -16,7 +16,20 @@ export default {
         url: '/products'
       })
     },
-    
+    register(data){
+      return apiAxios({
+        method:'post',
+        url:'auth/register',
+        data:data
+      })
+    },
+    login(data){
+      return apiAxios({
+        method:'post',
+        url:'auth/login',
+        data:data
+      })
+    }, 
     saveProducts(data){
         return apiAxios({
             method: 'post',

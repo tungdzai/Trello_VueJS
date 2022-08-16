@@ -54,6 +54,7 @@ export default {
     width: 768px;
     max-width: 100%;
     min-height: 480px;
+    margin-top: 50px;
 
     .overlay-container {
         position: absolute;

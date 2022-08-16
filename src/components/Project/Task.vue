@@ -97,6 +97,7 @@ export default {
                 let newColmnAdd = {
                     'id': Math.floor(Math.random() * 100000),
                     "title": this.message.trim(),
+                    "showcolumn":true,
                     "cards": []
                 }
                 this.boards.push(newColmnAdd)
@@ -222,7 +223,9 @@ textarea {
     display: flex;
     overflow-x: auto;
     margin-top: 10px;
-    width: 125%;
+    position: absolute;
+    z-index: 99;
+    top: 50px;
 
     .boardWrap {
         background: #e9ecef;

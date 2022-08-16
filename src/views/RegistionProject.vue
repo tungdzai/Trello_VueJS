@@ -2,21 +2,21 @@
 <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" class="demo-ruleForm">
     <h1>Create Account</h1>
     <el-form-item prop="name">
-        <input v-model="ruleForm.name" placeholder="Name" />
+        <input v-model="ruleForm.name" placeholder="Họ và Tên" />
     </el-form-item>
     <el-form-item prop="email" :rules="[
-                  { required: true, message: 'Please input email address!', trigger: 'blur' },
-                  { type: 'email', message: 'Please input correct email address !', trigger: ['blur', 'change'] }
+                  { required: true, message: 'Email không được để trống !', trigger: 'blur' },
+                  { type: 'email', message: 'Email chưa đúng dịnh dạng !', trigger: ['blur', 'change'] }
                 ]">
-        <input v-model="ruleForm.email" placeholder="Email" />
+        <input v-model="ruleForm.email" placeholder="Email..." />
     </el-form-item>
 
     <el-form-item prop="pass">
-        <input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="PassWord" />
+        <input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="Mật khẩu" />
     </el-form-item>
 
     <el-form-item prop="checkPass">
-        <input type="password" v-model="ruleForm.checkPass" autocomplete="off" placeholder="Confirm" />
+        <input type="password" v-model="ruleForm.checkPass" autocomplete="off" placeholder="Nhập lại mật khẩu" />
     </el-form-item>
     <el-button @click="submitForm('ruleForm')">Sign Up</el-button>
 </el-form>
@@ -29,9 +29,9 @@ export default {
     data() {
         var validatePass = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('Please input the password !'));
-            } else if (value.length <= 6) {
-                callback(new Error('Password must be more than 6 character!'));
+                callback(new Error('Mật khẩu không được để trống !'));
+            } else if (value.length < 6) {
+                callback(new Error('Mật khẩu phải lớn hơn 6 kí tự!'));
             } else {
                 if (this.ruleForm.checkPass !== '') {
                     this.$refs.ruleForm.validateField('checkPass');
@@ -41,9 +41,9 @@ export default {
         };
         var validatePass2 = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('Please input the password again'));
+                callback(new Error('Mật khẩu không được để trống !'));
             } else if (value !== this.ruleForm.pass) {
-                callback(new Error('Two inputs don\'t match!'));
+                callback(new Error('Không trùng với mật khẩu !'));
             } else {
                 callback();
             }
@@ -54,6 +54,9 @@ export default {
                 checkPass: '',
                 email: '',
                 name: ''
+            },
+            ruleFormError: {
+                errorName: ''
             },
             rules: {
                 pass: [{
@@ -66,7 +69,7 @@ export default {
                 }],
                 name: [{
                         required: true,
-                        message: 'Please input Activity name',
+                        message: 'Họ và Tên không được để trống !',
                         trigger: 'blur'
                     },
                     {
@@ -88,7 +91,8 @@ export default {
                         password: this.ruleForm.pass,
                     }
                     api.register(infoLogin).then(() => {
-                        alert('Đăng ký thành công !')
+                        alert('Đăng kí thành công');
+                        location.reload();
                     })
 
                 } else {
@@ -141,6 +145,7 @@ form {
         margin: 8px 0;
         width: calc(100% - 30px);
         border-radius: 15px;
+        outline: none;
     }
 
 }

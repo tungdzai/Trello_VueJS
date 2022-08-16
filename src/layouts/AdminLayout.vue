@@ -1,5 +1,5 @@
 <template>
-<div >
+<div>
     <div class="sidebar" :class="isOpened ? '' : 'open'" :style="cssVars">
         <div class="logo-details" style="margin: 6px 14px 0 14px;">
             <img v-if="menuLogo" :src="menuLogo" alt="menu-logo" class="menu-logo icon">
@@ -42,11 +42,20 @@
         </div>
     </div>
     <el-container>
-        <el-header class="header">
+        <el-header class="header" style="height:50px">
             <div class="headerLeftWrap">
                 <slot name="header"></slot>
             </div>
             <div class="headerRightWrap">
+                <div class="boardNew">
+                    <button>
+                        Tạo bảng
+                    </button>
+                </div>
+                <div class="inputSearch">
+                    <i class="el-icon-search"></i>
+                    <input type="text" placeholder="Tìm kiếm..">
+                </div>
                 <el-badge class="icon-header">
                     <i class="el-icon-message-solid" style="color:#fff"></i>
                 </el-badge>
@@ -64,11 +73,12 @@
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
-        </el-header >
+        </el-header>
         <!-- main -->
         <el-main class="main">
+            <img src="../assets/images/main.jpg" alt="">
             <slot>
-                <router-view/>
+                <router-view />
             </slot>
         </el-main>
     </el-container>
@@ -103,11 +113,11 @@ export default {
         menuOpenedPaddingLeftBody: {
             type: String,
             default: '78px'
-            
+
         },
         menuClosedPaddingLeftBody: {
             type: String,
-             default: '175px'
+            default: '175px'
         },
         //! Menu items
         menuItems: {
@@ -261,16 +271,73 @@ export default {
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-.main{
-    background-color: #fff;
+
+.boardNew {
+    margin: 30px;
+    button {
+        border: 2px solid #fff;
+        padding: 5px 15px;
+        background-color: rgb(168, 182, 190);
+        border-radius: 20px;
+        color: rgb(219, 216, 216);
+        font-weight: bold;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba(168, 182, 190, 0.3);
+            color: rgba(242, 245, 247, 1);
+        }
+
+    }
 }
-.el-container{
+
+.inputSearch {
+    display: flex;
+    align-items: center;
+
+    input {
+        border: none;
+        outline: none;
+        padding: 5px 30px;
+        padding-right: 0;
+        margin-right: 20px;
+        position: relative;
+        border-radius: 5px;
+        background-color: rgb(168, 182, 190);
+
+        &:focus {
+            background-color: #fff;
+        }
+
+    }
+
+    .el-icon-search {
+        position: absolute;
+        z-index: 1;
+        padding-left: 6px;
+        font-size: 18px;
+        cursor: pointer;
+
+    }
+}
+
+.main {
+    img {
+        position: relative;
+        width: 100%;
+        height: 98%;
+    }
+}
+
+.el-container {
     background-color: #e9ecef;
     height: 100vh;
 }
-.adminWrap{
+
+.adminWrap {
     height: 100vh;
 }
+
 body {
     transition: all 0.5s ease;
     padding: 0;
@@ -484,7 +551,7 @@ body {
 
 .sidebar.open div.profile {
     width: 175px;
-    background-color:#fff;
+    background-color: #fff;
 }
 
 .sidebar div .profile-details {
@@ -600,10 +667,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #d8e0ea;
-    height: 60px;
+    border-bottom: 1px solid hsl(201deg 18% 73%);
+    height: 50px;
     width: 100%;
-    background: #11101d;
+    background-color: hsl(201deg 18% 73%);
     padding: 0 24px;
 
     .headerLeftWrap {
@@ -619,7 +686,7 @@ body {
         align-items: center;
 
         .icon-header {
-            margin-right: 40px;
+            margin-right: 20px;
             font-size: 24px;
         }
     }

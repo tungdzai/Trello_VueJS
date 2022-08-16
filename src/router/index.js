@@ -80,11 +80,6 @@ const routes = [
   component: () => import('../layouts/LoginProject.vue')
 },
 {
-  path: '/AdminLayout',
-  name: 'AdminLayout',
-  component: () => import('../layouts/AdminLayout.vue')
-},
-{
   path: '/accountInFormation',
   name: 'accountInFormation',
   component: () => import('../views/accountInFormation.vue')
@@ -110,7 +105,7 @@ const routes = [
   component: () => import('../views/pass.vue')
 },
 {
-  path: '/board',
+  path: '/AdminLayout',
   name: 'TaskProject',
   component: () => import('../components/Project/Task.vue')
 },

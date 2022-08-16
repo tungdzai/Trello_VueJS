@@ -2,8 +2,8 @@
 <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" class="demo-ruleForm">
     <h1>Sign In</h1>
     <el-form-item prop="email" :rules="[
-                  { required: true, message: 'Please input email address!', trigger: 'blur' },
-                  { type: 'email', message: 'Please input correct email address !', trigger: ['blur', 'change'] }
+                  { required: true, message: 'Email không được để trống !', trigger: 'blur' },
+                  { type: 'email', message: 'Email chưa đúng định dạng !', trigger: ['blur', 'change'] }
                 ]">
         <input v-model="ruleForm.email" placeholder="Email" />
     </el-form-item>

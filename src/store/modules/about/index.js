@@ -7,6 +7,7 @@ export default {
             "title": "group 1",
             "user_id": 110,
             "index": 1,
+            "checkaddCard":true,
             "cards": [
                 {
                     "id": 822,
@@ -71,6 +72,7 @@ export default {
             "title": "group 2",
             "user_id": 110,
             "index": 1,
+            "checkaddCard":true,
             "cards": [{
                     "id": 830,
                     "title": "task 9",

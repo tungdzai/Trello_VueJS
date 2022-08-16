@@ -2,7 +2,7 @@
 <div id="id">
     <AdminLayout>
         <draggable class="container">
-            <Draggable v-for="(value, index) in boards " :key="index" class="boardWrap">
+            <div v-for="(value, index) in boards " :key="index" class="boardWrap">
                 <div class="colWrap">
                     <div class="header_text">
                         <input type="text" v-model="value.title" class="updateInputTitle" @click="inlineTextAll">
@@ -24,25 +24,37 @@
                         </el-dropdown>
                     </div>
                     <ul>
-                        <draggable  group="col_task">
+                        <draggable group="col_task">
                             <li v-for="element in value.cards" :key="element.id">
                                 {{element.title}}
                             </li>
                         </draggable>
                     </ul>
-                    <div class="addToCard" v-if="showAddToCard">
+                    <div class="addToCard" v-if="!value.checkaddCard">
                         <textarea placeholder="Nhập tiêu đề cho thẻ này ..."></textarea>
                         <div class="buttonAddToCard">
                             <button class="Add_Card">Thêm thẻ</button>
-                            <i class="el-icon-close"></i>
+                            <i class="el-icon-close" @click="clickdeleteaddcard(value)"></i>
                         </div>
                     </div>
-                    <div class="fooder_add"  v-if='!showAddToCard' @click="toggleOpenNewCard(value)"><i class="el-icon-plus"></i> Add card</div>
+                    <div class="fooder_add" @click="toggleOpenNewCard(value)" v-if="value.checkaddCard">
+                        <i class="el-icon-plus"></i> 
+                        <p>Add card</p>
+                    </div>
                 </div>
-            </Draggable>
-            <div class="add_column">
-                <input type="text" placeholder="Nhập tiêu đề danh sách" v-model="message" @keyup="handleKeyup">
-                <button :disabled="isButtonDisabled" @click="btn_addcolumn"><i class="el-icon-arrow-right"></i></button>
+            </div>
+            <div class="AddToCard" v-if="addCard" @click="clickAdd">
+                <i class="el-icon-plus"></i>
+                <p>Thêm danh sách khác </p>
+            </div>
+            <div class="add_column" v-if="!addCard">
+                <div class="input_add_column">
+                    <input type="text" placeholder="Nhập tiêu đề danh sách" v-model="messageAddto" @keyup="handleKeyup">
+                    <div class="btn_add_column">
+                        <button @click="btn_addcolumn()">Thêm danh sách</button>
+                        <i class="el-icon-close" @click="clickdeleteColumn"></i>
+                    </div>
+                </div>
             </div>
         </draggable>
     </AdminLayout>
@@ -69,40 +81,46 @@ export default {
     },
     data() {
         return {
-            message: '',
-            isButtonDisabled: true,
-            showAddToCard: false,
+            addCard: true,
+            messageAddto: ''
         }
     },
-    watch: {
-        message(value) {
-            if (value.length > 0) {
-                this.isButtonDisabled = false
-            }
-        }
-    },
+    watch: {},
     methods: {
 
         btn_addcolumn() {
             let newColmnAdd = {
-                'id': 10,
-                "title": this.message.trim(),
+                'id': Math.floor(Math.random() * 100000),
+                "title": this.messageAddto.trim(),
+                "checkaddCard": true,
                 "cards": []
             }
-            this.boards.push(newColmnAdd)
-            this.message = ''
+            if (this.messageAddto.length > 0) {
+                this.boards.push(newColmnAdd)
+                this.addCard = true
+                this.messageAddto = ''
+            }
         },
         handleKeyup(e) {
             if (e.code === 'Enter') {
                 let newColmnAdd = {
                     'id': Math.floor(Math.random() * 100000),
-                    "title": this.message.trim(),
-                    "showcolumn":true,
+                    "title": this.messageAddto.trim(),
+                    "checkaddCard": true,
                     "cards": []
                 }
-                this.boards.push(newColmnAdd)
-                this.message = ''
+                if (this.messageAddto.length > 0) {
+                    this.boards.push(newColmnAdd)
+                    this.addCard = true
+                    this.messageAddto = ''
+                }
             }
+        },
+        clickAdd() {
+            this.addCard = false
+        },
+        clickdeleteColumn() {
+            this.addCard = true
         },
         clickdelete(item) {
             this.$confirm('Bạn chắc chắn muốn xóa không ?', {
@@ -125,10 +143,17 @@ export default {
             e.target.select()
 
         },
-        toggleOpenNewCard(item) {    
-            for( let i = 0 ; i< this.boards.length; i++){
-                if(item.id === this.boards[i].id){
-                    this.showAddToCard=true
+        toggleOpenNewCard(item) {
+            for (let i = 0; i < this.boards.length; i++) {
+                if (item.id === this.boards[i].id) {  
+                     this.boards[i].checkaddCard=false
+                }
+            }
+        },
+        clickdeleteaddcard(item){
+             for (let i = 0; i < this.boards.length; i++) {
+                if (item.id === this.boards[i].id) {  
+                     this.boards[i].checkaddCard=true
                 }
             }
         }
@@ -138,6 +163,79 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.fooder_add{
+    display: flex;
+    align-items: center;
+    p{
+        margin: 0;
+    }
+}
+.AddToCard {
+    display: flex;
+    align-items: center;
+    height: max-content;
+    background-color: #e9ecef;
+    margin-left: 20px;
+    padding: 5px 20px;
+    padding-right: 0;
+    border-radius: 10px;
+    text-align: left;
+    width: 250px;
+    cursor: pointer;
+
+    p {
+        margin: 0;
+    }
+}
+
+.add_column {
+    width: 270px;
+    background-color: #e9ecef;
+    height: max-content;
+    border-radius: 10px;
+    margin-left: 20px;
+
+    .input_add_column {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+        border: none;
+
+        input {
+            width: 100%;
+            border: none;
+            padding: 10px 5px;
+            outline: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+
+        }
+
+        .btn_add_column {
+            display: flex;
+            align-items: center;
+
+            button {
+                height: 32px;
+                min-height: 32px;
+                background-color: #0079bf;
+                border-radius: 5px;
+                border: none;
+                box-shadow: none;
+                color: #fff
+            }
+
+            i {
+                font-size: 27px;
+                color: #42526e;
+                margin-left: 10px;
+            }
+        }
+
+    }
+
+}
+
 .buttonAddToCard {
     display: flex;
     background-color: #e9ecef;
@@ -193,29 +291,6 @@ textarea {
         padding: 3px;
         padding-left: 5px;
         border-radius: 10px;
-    }
-}
-
-.add_column {
-    width: 220px;
-    display: flex;
-    background-color: #e9ecef;
-    border-radius: 10px;
-    height: 22px;
-    padding: 10px;
-    margin-left: 15px;
-
-    input {
-        width: 100%;
-        border: none;
-        background-color: #e9ecef;
-        outline: none;
-
-    }
-
-    button {
-        background-color: #e9ecef;
-        border: none;
     }
 }
 
@@ -296,5 +371,4 @@ textarea {
     }
 
 }
-
 </style>

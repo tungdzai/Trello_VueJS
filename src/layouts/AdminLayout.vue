@@ -9,7 +9,6 @@
             </div>
             <i class="bx" :class="isOpened ? 'bx-menu-alt-right' : 'bx-menu'" id="btn" @click="isOpened = !isOpened" />
         </div>
-
         <div style="display: flex ; flex-direction:column; justify-content: space-between; flex-grow: 1; max-height: calc(100% - 60px); ">
             <div id="my-scroll" style="margin: 6px 14px 0 14px;">
                 <ul class="nav-list" style="overflow: visible;">
@@ -277,9 +276,9 @@ export default {
     button {
         border: 2px solid #fff;
         padding: 5px 15px;
-        background-color: rgb(168, 182, 190);
+        background-color: hsl(201deg 18% 73%);
         border-radius: 20px;
-        color: rgb(219, 216, 216);
+        color:rgb(90, 88, 88);
         font-weight: bold;
         cursor: pointer;
 
@@ -322,6 +321,7 @@ export default {
 }
 
 .main {
+    display: flex;
     img {
         position: relative;
         width: 100%;

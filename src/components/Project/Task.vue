@@ -30,15 +30,15 @@
                             </li>
                         </draggable>
                     </ul>
-                    <div class="addToCard" v-if="!value.checkaddCard">
+                    <div class="addToCard" v-if="!value.checkaddCard" >
                         <textarea placeholder="Nhập tiêu đề cho thẻ này ..."></textarea>
                         <div class="buttonAddToCard">
                             <button class="Add_Card">Thêm thẻ</button>
-                            <i class="el-icon-close" @click="clickdeleteaddcard(value)"></i>
+                            <i class="el-icon-close" @click="clickdeleteaddcard(value)" @blur="handleBlur($event)"></i>
                         </div>
                     </div>
                     <div class="fooder_add" @click="toggleOpenNewCard(value)" v-if="value.checkaddCard">
-                        <i class="el-icon-plus"></i> 
+                        <i class="el-icon-plus"></i>
                         <p>Add card</p>
                     </div>
                 </div>
@@ -87,7 +87,9 @@ export default {
     },
     watch: {},
     methods: {
-
+        handleBlur() {
+            console.log("hihi")
+        },
         btn_addcolumn() {
             let newColmnAdd = {
                 'id': Math.floor(Math.random() * 100000),
@@ -145,15 +147,15 @@ export default {
         },
         toggleOpenNewCard(item) {
             for (let i = 0; i < this.boards.length; i++) {
-                if (item.id === this.boards[i].id) {  
-                     this.boards[i].checkaddCard=false
+                if (item.id === this.boards[i].id) {
+                    this.boards[i].checkaddCard = false
                 }
             }
         },
-        clickdeleteaddcard(item){
-             for (let i = 0; i < this.boards.length; i++) {
-                if (item.id === this.boards[i].id) {  
-                     this.boards[i].checkaddCard=true
+        clickdeleteaddcard(item) {
+            for (let i = 0; i < this.boards.length; i++) {
+                if (item.id === this.boards[i].id) {
+                    this.boards[i].checkaddCard = true
                 }
             }
         }
@@ -163,13 +165,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fooder_add{
+.fooder_add {
     display: flex;
     align-items: center;
-    p{
+
+    p {
         margin: 0;
     }
 }
+
 .AddToCard {
     display: flex;
     align-items: center;

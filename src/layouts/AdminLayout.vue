@@ -75,7 +75,7 @@
         </el-header>
         <!-- main -->
         <el-main class="main">
-            <img src="../assets/images/main.jpg" alt="">
+            <!-- <img src="../assets/images/main.jpg" alt=""> -->
             <slot>
                 <router-view />
             </slot>
@@ -130,16 +130,9 @@ export default {
                 },
                 {
                     link: '#',
-                    name: 'Thành viên',
+                    name: 'Tài khoản',
                     tooltip: 'ThanhVien',
                     icon: 'bx-user',
-                    iconel: 'el-icon-plus'
-                },
-                {
-                    link: '#',
-                    name: 'Cài đặt',
-                    tooltip: 'caidat',
-                    icon: 'bx-cog',
                 },
             ],
         },
@@ -322,19 +315,14 @@ export default {
 
 .main {
     display: flex;
-    img {
-        position: relative;
-        width: 100%;
-        height: 98%;
-    }
+    // img {
+    //     position: relative;
+    //     width: 100%;
+    //     height: 98%;
+    // }
 }
 
 .el-container {
-    background-color: #e9ecef;
-    height: 100vh;
-}
-
-.adminWrap {
     height: 100vh;
 }
 

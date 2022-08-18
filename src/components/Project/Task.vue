@@ -30,11 +30,11 @@
                             </li>
                         </draggable>
                     </ul>
-                    <div class="addToCard" v-if="!value.checkaddCard" >
-                        <textarea placeholder="Nhập tiêu đề cho thẻ này ..."></textarea>
+                    <div class="addToCard" v-if="!value.checkaddCard">
+                        <textarea placeholder="Nhập tiêu đề cho thẻ này ..." v-model="messageaddCard" ></textarea>
                         <div class="buttonAddToCard">
-                            <button class="Add_Card">Thêm thẻ</button>
-                            <i class="el-icon-close" @click="clickdeleteaddcard(value)" @blur="handleBlur($event)"></i>
+                            <button class="Add_Card" @click="clickAddCard(value)">Thêm thẻ</button>
+                            <i class="el-icon-close" @click="clickdeleteaddcard(value)"></i>
                         </div>
                     </div>
                     <div class="fooder_add" @click="toggleOpenNewCard(value)" v-if="value.checkaddCard">
@@ -50,7 +50,7 @@
             <div class="add_column" v-if="!addCard">
                 <div class="input_add_column">
                     <input type="text" placeholder="Nhập tiêu đề danh sách" v-model="messageAddto" @keyup="handleKeyup">
-                    <div class="btn_add_column">
+                    <div class="btn_add_column" >
                         <button @click="btn_addcolumn()">Thêm danh sách</button>
                         <i class="el-icon-close" @click="clickdeleteColumn"></i>
                     </div>
@@ -82,13 +82,28 @@ export default {
     data() {
         return {
             addCard: true,
-            messageAddto: ''
+            messageAddto: '',
+            messageaddCard: ''
         }
     },
     watch: {},
     methods: {
-        handleBlur() {
-            console.log("hihi")
+        clickAddCard(item) {
+            let newCard = {
+                "id": Math.floor(Math.random() * 100000),
+                "title": this.messageaddCard.trim(),
+            }
+            if (this.messageaddCard.length > 0) {
+                for (let i = 0; i < this.boards.length; i++) {
+                    if (item.id === this.boards[i].id) {
+                        console.log(this.boards[i].cards)
+                        this.boards[i].cards.push(newCard)
+                        this.messageaddCard = ''
+                        this.boards[i].checkaddCard = true
+                    }
+                }
+
+            }
         },
         btn_addcolumn() {
             let newColmnAdd = {
@@ -171,6 +186,12 @@ export default {
 
     p {
         margin: 0;
+    }
+
+    &:hover {
+        background: #cdcecf;
+        padding: 5px;
+        border-radius: 10px;
     }
 }
 
@@ -302,8 +323,6 @@ textarea {
     display: flex;
     overflow-x: auto;
     margin-top: 10px;
-    position: absolute;
-    z-index: 99;
     top: 50px;
 
     .boardWrap {
@@ -342,7 +361,7 @@ textarea {
                 list-style-type: none;
                 padding: 0;
                 overflow-y: auto;
-                max-height: 370px;
+                max-height: 300px;
 
                 &::-webkit-scrollbar {
                     -webkit-appearance: none;

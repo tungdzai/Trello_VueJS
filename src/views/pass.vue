@@ -10,10 +10,14 @@
                     <span class="text">Đổi mật khẩu</span>
                     <div class="inputpassWrap">
                         <img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/lock.png" alt="">
-                        <input type="password" placeholder="Nhập mật khẩu hiện tại">
-                        <input type="password" placeholder="Nhập mật khẩu mới" />
-                        <input type="password" placeholder="Nhập mật lại mật khẩu mới" />
-                        <button>Lưu thay đổi</button>
+                        <input type="password" placeholder="Nhập lại mật khẩu mới " v-model="passnew">
+                    </div>
+                    <div class="inputpassWrap">
+                        <img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/lock.png" alt="">
+                        <input type="password" placeholder="Xác nhận lại mật khẩu mới" v-model="passconfirm">
+                    </div>
+                    <div class="inputpassWrap">
+                        <button @click="clickupdatapass" :plain="true">Lưu thay đổi</button>
                     </div>
                 </div>
             </div>
@@ -24,10 +28,53 @@
 
 <script>
 import AdminLayout from '../layouts/AdminLayout.vue'
+import api from '../api'
 export default {
     name: 'passUpdate',
     components: {
         AdminLayout
+    },
+    data() {
+        return {
+            passconfirm: '',
+            passnew: ''
+        }
+    },
+    mounted() {
+        api.infoAuthme().then((res) => {
+            console.log(res);
+        })
+    },
+    methods: {
+        clickupdatapass() {
+            let data = {
+                'password': this.passnew,
+                "password_confirmation": this.passconfirm
+            }
+            if ( this.passconfirm.length === 0 || this.passnew.length === 0) {
+                this.$message({
+                    showClose: true,
+                    message: 'Mật khẩu không được để trống',
+                    type: 'warning'
+                });
+            } else {
+                api.putUpdataPass(data).then((res) => {
+                    console.log(res);
+                    this.$message({
+                        showClose: true,
+                        message: 'Đổi mật khẩu thành công .',
+                        type: 'success'
+                    });
+
+                }).catch(() => {
+                    this.$message({
+                        showClose: true,
+                        message: 'Mật khẩu không trùng khớp',
+                        type: 'error'
+                    });
+                })
+            }
+        }
     }
 }
 </script>
@@ -68,7 +115,7 @@ export default {
                     width: 28px;
                     height: 28px;
                     position: absolute;
-                    top: 5%;
+                    top: 15%;
                     left: 5px;
 
                 }
@@ -78,7 +125,7 @@ export default {
                     width: 100%;
                     height: 40px;
                     border-radius: 4px;
-                    margin: 4px 0px 34px;
+                    margin: 4px 0px 15px;
                     padding-left: 40px;
                     outline: none;
 

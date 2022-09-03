@@ -1,6 +1,6 @@
 <template>
 <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" class="demo-ruleForm">
-    <h1>Create Account</h1>
+    <h1>Đăng ký tài khoản</h1>
     <el-form-item prop="name">
         <input v-model="ruleForm.name" placeholder="Họ và Tên" />
     </el-form-item>
@@ -8,7 +8,7 @@
                   { required: true, message: 'Email không được để trống !', trigger: 'blur' },
                   { type: 'email', message: 'Email chưa đúng dịnh dạng !', trigger: ['blur', 'change'] }
                 ]">
-        <input v-model="ruleForm.email" placeholder="Email..." />
+        <input v-model="ruleForm.email" placeholder="Email" />
     </el-form-item>
 
     <el-form-item prop="pass">
@@ -18,7 +18,7 @@
     <el-form-item prop="checkPass">
         <input type="password" v-model="ruleForm.checkPass" autocomplete="off" placeholder="Nhập lại mật khẩu" />
     </el-form-item>
-    <el-button @click="submitForm('ruleForm')">Sign Up</el-button>
+    <el-button @click="submitForm('ruleForm')" :plain="true">Đăng ký</el-button>
 </el-form>
 </template>
 
@@ -43,7 +43,7 @@ export default {
             if (value === '') {
                 callback(new Error('Mật khẩu không được để trống !'));
             } else if (value !== this.ruleForm.pass) {
-                callback(new Error('Không trùng với mật khẩu !'));
+                callback(new Error('Mật khẩu nhập lại chưa đúng !'));
             } else {
                 callback();
             }
@@ -54,9 +54,6 @@ export default {
                 checkPass: '',
                 email: '',
                 name: ''
-            },
-            ruleFormError: {
-                errorName: ''
             },
             rules: {
                 pass: [{
@@ -73,8 +70,8 @@ export default {
                         trigger: 'blur'
                     },
                     {
-                        min: 3,
-                        message: 'Length should be 3',
+                        min: 8,
+                        message: 'Họ Và Tên chưa đúng định dạng !',
                         trigger: 'blur'
                     }
                 ],
@@ -91,8 +88,13 @@ export default {
                         password: this.ruleForm.pass,
                     }
                     api.register(infoLogin).then(() => {
-                        alert('Đăng kí thành công');
+                        this.$message({
+                            message: 'Đăng kí tài khoản thành công.',
+                            type: 'success'
+                        });
                         location.reload();
+                    }).catch(()=>{
+                        this.$message.error('Email đã tồn tại');
                     })
 
                 } else {

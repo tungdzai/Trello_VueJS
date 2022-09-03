@@ -1,23 +1,25 @@
 <template>
 <el-form :model="ruleForm" ref="ruleForm" status-icon :rules="rules" class="demo-ruleForm">
-    <h1>Sign In</h1>
+    <h1>Đăng nhập</h1>
     <el-form-item prop="email" :rules="[
                   { required: true, message: 'Email không được để trống !', trigger: 'blur' },
                   { type: 'email', message: 'Email chưa đúng định dạng !', trigger: ['blur', 'change'] }
                 ]">
-        <input v-model="ruleForm.email" placeholder="Email" />
+        <input v-model="ruleForm.email" placeholder="Email"/>
     </el-form-item>
 
     <el-form-item prop="pass">
         <input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="PassWord" />
     </el-form-item>
-    <p>Forgot your password?</p>
-    <el-button @click="submitForm('ruleForm')">Sign In</el-button>
+    <el-button @click="submitForm('ruleForm')">Đăng nhập</el-button>
 </el-form>
 </template>
 
 <script>
-import api from '@/api';
+import api from '../api';
+import {
+    mapMutations
+} from 'vuex'
 
 export default {
     name: 'SignInProject',
@@ -46,6 +48,7 @@ export default {
         };
     },
     methods: {
+        ...mapMutations('auth', ['updateAccessToken', 'updateStatusLogin']),
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
@@ -53,7 +56,10 @@ export default {
                         email: this.ruleForm.email,
                         password: this.ruleForm.pass,
                     }
-                    api.login(sigin).then(() => {
+                    api.login(sigin).then((res) => {
+                        this.updateAccessToken(res.data.access_token)
+                        console.log(res.data.access_token)
+                        this.updateStatusLogin(true);
                         this.$router.push({
                             path: 'AdminLayout',
                             query: {

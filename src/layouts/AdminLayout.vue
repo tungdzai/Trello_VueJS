@@ -11,7 +11,7 @@
                     <input type="text" placeholder="Tìm kiếm..">
                 </div>
                 <el-badge class="icon-header">
-                    <i class="el-icon-message-solid" style="color:#fff"></i>
+                    <span style="color: #fff;font-size: 15px">Xin chào:{{nameshown}}</span>
                 </el-badge>
                 <el-dropdown style="cursor: pointer">
                     <div @click="homeTrello">
@@ -45,15 +45,18 @@ export default {
     data() {
         return {
             datainfo: {},
-            image: ""
+            image: "",
+            nameshown: '',
         }
     },
     mounted() {
         api.infoAuthme().then((res) => {
+            console.log(res.data);
             this.datainfo = res.data
-            if(this.datainfo.avatar == null){
-                this.image="https://24s.vn/anh-dai-dien-cho-facebook-de-thuong/imager_3918.jpg"
-            }else{
+            this.nameshown = this.datainfo.name
+            if (this.datainfo.avatar == null) {
+                this.image = "https://24s.vn/anh-dai-dien-cho-facebook-de-thuong/imager_3918.jpg"
+            } else {
                 this.image = "http://vuecourse.zent.edu.vn/storage/users/" + this.datainfo.avatar
             }
         })

@@ -215,17 +215,50 @@ export default {
         url:'/files/'+id
       })
     },
-    updataDirectories(id,index){
+    updataDirectories(data,id){
       return apiAxios({
         method:'PUT',
-        url:'/directories/'+id+'/index?index='+index,
+        url:'/directories/'+id+'/index',
+        data
       })
     },
+    updatechangestatus(data,id){
+      return apiAxios({
+        method:'PUT',
+        url:'check-list-childs/'+id+'/change-status',
+        data
+      })
+    },
+    updateDeadline(data, id){
+      return apiAxios({
+          method: 'put',
+          url: 'cards/' + id + '/change-status-deadline',
+          data: data
+      })
+    },
+    updateStatusCard(data, id){
+      return apiAxios({
+          method: 'put',
+          url: 'cards/' + id + '/change-status',
+          data: data
+      })
+    },
+    
+    //Thay đổi danh sách thẻ
     putchangecards(data,id){
       return apiAxios({
         method:'PUT',
         url:'/cards/'+id+'/directory',
         data
       })
+    },
+
+    //Thay đổi vị trí thẻ
+    putcardslocation(data,id){
+      return apiAxios({
+        method: 'put',
+        url: 'cards/' + id + '/index',
+        data: data
+    })
     }
 }

@@ -138,8 +138,13 @@ export default {
                     border-radius: 4px;
                     color: rgb(255, 255, 255);
                     font-size: 14px;
-                    background-color: rgb(11, 116, 229);
+                    background-color:#ff5f1b;
                     cursor: pointer;
+                    &:hover{
+                        background-color:#f84f07;
+                        font-weight: bold;
+                    }
+                    
                 }
 
             }

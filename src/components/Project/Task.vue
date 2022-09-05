@@ -24,26 +24,26 @@
                         </el-dropdown>
                     </div>
                     <ul>
-                        <draggable group="col_task" :list="value.cards" :move="moveCards">
+                        <draggable group="col_task" :list="value.cards" :move="moveCards" >
                             <li v-for="element in value.cards" :key="element.id" @click="dialogFormVisible = true, clickli(element)">
+
                                 <div class="ColorLabelWrap">
                                     <div class="colorTitleLabels" v-for="listLabels in element.labels" :key="listLabels.id" :style="{ backgroundColor:listLabels.color}"></div>
                                 </div>
+
                                 <span>{{element.title.charAt(0).toUpperCase()+element.title.slice(1)}}</span>
-                                <!-- <div class="ListShowTodo">
-                                    <div class="showDeadline">
-                                        <i class="el-icon-time"></i>
-                                        <span>9 tháng 3</span>
+
+                                <div class="ListShowTodo" >
+                                    <div class="showDeadline" >
+                                        <i class="el-icon-time" v-if="element.deadline != null"></i>
+                                        <span style="color:rgb(97, 189, 79)" v-if="element.status === 1">{{element.deadline}}</span>
+                                        <span v-else>{{element.deadline}}</span>
                                     </div>
-                                    <div class="showFileUpLoadCard">
-                                        <i class="el-icon-paperclip"></i>
-                                        <span>{{}}</span>
+                                    <div class="showdescription" v-if="element.description != null">
+                                        <i class="el-icon-s-unfold" style="color:rgb(0, 0, 255)"> </i>
                                     </div>
-                                    <div class="showIconCheckList">
-                                        <i class="el-icon-folder-checked"></i>
-                                        <span>1/3</span>
-                                    </div>
-                                </div> -->
+                                </div>
+
                             </li>
                             <el-dialog :visible.sync="dialogFormVisible">
                                 <form class="form_des">
@@ -59,6 +59,16 @@
                                                     </span>
                                                 </div>
                                                 <i class="el-icon-plus" @click="AddLabelsColor"></i>
+                                            </div>
+                                        </div>
+                                        <div class="deadlineWrap" v-if="deadlineShowCheck">
+                                            <span>Ngày hết hạn</span>
+                                            <div class="deadlineTitle">
+                                                <el-checkbox @change="updateStatusCard" v-model="statusCard"></el-checkbox>
+                                                <div class="deadlineShow">
+                                                    {{deadlineShow}}
+                                                    <span v-if="statusCard === true " class="success">Đã hoàn thành</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="desWrap">
@@ -90,6 +100,7 @@
                                                     <div class="nameUploadFile">
                                                         <span>{{showFileLoad.name}}</span>
                                                         <div class="inputEditUploadFile">
+                                                            <span @click="AddAvatartCard(showFileLoad)">Đặt ảnh bìa</span>
                                                             <span @click="DelUpLoadFile(showFileLoad)">Xóa</span>
                                                             <span @click="EditUpLoadFile(showFileLoad)">Chỉnh sửa</span>
                                                         </div>
@@ -139,16 +150,16 @@
                                             <div class="list_des_item">
                                                 <div class="passdatachilds" v-if="showdataCheckList === 1 && showCheckChildsId === checklist.id">
                                                     <div class="listChildsFor" v-for="listShowChild in listchilds" :key="listShowChild.id">
-                                                        <el-checkbox></el-checkbox>
+
+                                                        <el-checkbox @change="delStatusWorkChil(listShowChild)" v-if="listShowChild.status === 1" v-model="checked">
+                                                        </el-checkbox>
+                                                        <el-checkbox v-else @change="updateStatusWorkChil(listShowChild)"></el-checkbox>
                                                         <div class="editTileChilds" v-if="showUpdataChild == 1 && showTitle_Id == listShowChild.id">
                                                             <textarea class="textareaUpdataTitle" v-model="textareaUpdataTitle"></textarea>
                                                             <div class="editButtonChilds">
                                                                 <div class="editButtonChilds_Left">
                                                                     <p @click="clickUpdataTitleChilds(listShowChild)">Lưu</p>
                                                                     <i class="el-icon-close" @click="closeEditChilds(listShowChild)"></i>
-                                                                </div>
-                                                                <div class="editButtonChilds_Right">
-                                                                    <i class="el-icon-time">Ngày hết hạn</i>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -166,10 +177,6 @@
                                                         <div class="btn_checkListchilds_addel">
                                                             <span class="save" @click="clicksavechild(checklist)">Thêm</span>
                                                             <span class="remove" @click="clickRemoveChild(checklist)">Hủy</span>
-                                                        </div>
-                                                        <div class="btn_checkListchilds_dl">
-                                                            <i class="el-icon-date"></i>
-                                                            <span>Ngày hết hạn</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -280,12 +287,12 @@
                                         </div>
                                         <input type="file" @change="onChangeFile" id="fileInput" style="display:none">
                                         <!-- datePicker -->
-                                        <!-- <div>
-                                            <div class="block">
-                                                <el-date-picker type="datetime" placeholder="Select date and time">
-                                                </el-date-picker>
-                                            </div>
-                                        </div> -->
+
+                                        <div class="block">
+                                            <el-date-picker v-model="deadline" type="datetime" placeholder="Select date and time" @blur="handleUpdateDeadline">
+                                            </el-date-picker>
+                                        </div>
+
                                     </div>
                                 </form>
                             </el-dialog>
@@ -326,7 +333,7 @@
 <script>
 import AdminLayout from '../../layouts/AdminLayout.vue'
 import api from '../../api'
-
+import moment from "moment";
 // import {
 //     mapState
 // } from 'vuex'
@@ -340,10 +347,12 @@ export default {
 
     data() {
         return {
-            // showColorLabelCard: '',
-            // itemColorLabel_Id: '',
-            value1: '',
+            lenghtFileUpLOAD:'',
+            deadlineShowCheck: true,
+            statusCard: false,
+            checked: true,
             DeleteFiletitle: '',
+            deadline: '',
             DeleteUpLoadFile_Id: '',
             titleEditFileUpload: '',
             showFiletitle: '',
@@ -431,6 +440,9 @@ export default {
             colorEditLabels: '',
             dataLabelsShow: [],
             objEditLabel: {},
+            deadlineShow: '',
+            vatatarcard:''
+
 
         }
     },
@@ -438,23 +450,88 @@ export default {
         api.getListDirectories()
             .then((res) => {
                 this.boards = res.data.data;
-                console.log(res);
             })
     },
     methods: {
-        moveCards(item) {
-            console.log(item.draggedContext);
+        // changedirectory(e){
+        //     console.log(e);
+        // },
+        AddAvatartCard(item){
+            console.log(item);
+        },
+        updateStatusCard() {
             let data = {
-                "index": item.draggedContext.futureIndex,
-                "directory_id": item.draggedContext.element.directory_id
+                "status": this.statusCard ? 1 : 0
             }
-            api.putchangecards(data, item.draggedContext.element.id).then((res) => {
-                console.log(res);
+            api.updateStatusCard(data, this.cloneItem.id).then(() => {
+                api.getlistCard(this.cloneItem.id).then(() => {
+                })
             })
         },
+        handleUpdateDeadline() {
+            let data = {
+                'deadline': moment(this.deadline).format('YYYY-MM-DD H:mm:ss')
+            }
+
+            api.updateDeadline(data, this.cloneItem.id).then(() => {
+                api.getlistCard(this.cloneItem.id).then((res) => {
+                    this.deadlineShow = res.data.data.deadline
+                    this.deadlineShowCheck = true
+                    this.deadline = ''
+                })
+            })
+        },
+        delStatusWorkChil(item) {
+            this.showStatusID = item.id
+            let data = {
+                'status': item.status ? 0 : 1
+            }
+            api.updatechangestatus(data, item.id).then(() => {
+                api.getlistCard(this.cloneItem.id).then((res) => {
+                    for (let i = 0; i < res.data.data.check_lists.length; i++) {
+                        if (item.check_list_id == res.data.data.check_lists[i].id) {
+                            this.listchilds = res.data.data.check_lists[i].check_list_childs
+
+                        }
+                    }
+                })
+            })
+        },
+        updateStatusWorkChil(item) {
+            let data = {
+                'status': item.status ? 0 : 1
+            }
+            api.updatechangestatus(data, item.id).then(() => {
+                api.getlistCard(this.cloneItem.id).then((res) => {
+                    for (let i = 0; i < res.data.data.check_lists.length; i++) {
+                        if (item.check_list_id == res.data.data.check_lists[i].id) {
+                            this.listchilds = res.data.data.check_lists[i].check_list_childs
+                        }
+                    }
+                })
+            })
+        },
+
+        moveCards(item) {
+            console.log(item);
+            let data = {
+                "index": item.draggedContext.futureIndex,
+                "directory_id":item.relatedContext.element.directory_id
+            }
+            api.putcardslocation(data, item.draggedContext.element.id).then(() => {
+                api.putchangecards(data,item.draggedContext.element.id).then(()=>{
+                    
+                })
+            })
+        },
+
+        
         moveColumn(item) {
-            api.updataDirectories(item.draggedContext.element.id, item.draggedContext.futureIndex).then((res) => {
-                console.log(res);
+            let data={
+                'index':item.draggedContext.futureIndex
+            }
+            api.updataDirectories(data, item.draggedContext.element.id).then(() => {
+
             })
         },
         closeLablesNew() {
@@ -694,12 +771,23 @@ export default {
             this.titledescription = this.cloneItem.description
             api.getlistCard(item.id).then((res) => {
                 console.log(res);
+                if (res.data.data.status === 1) {
+                    this.statusCard = true
+                } else {
+                    this.statusCard = false
+                }
                 this.check_list_clone = res.data.data.check_lists
                 this.dataLabelsShow = res.data.data.labels
                 this.listUploadFile = res.data.data.files
+                if (res.data.data.deadline == null) {
+                    this.deadlineShowCheck = false
+                } else {
+                    this.deadlineShow = res.data.data.deadline
+                }
             })
         },
         clicksavechild(item) {
+            console.log(item);
             let data = {
                 'title': this.titlecheckchilds,
                 'check_list_id': item.id
@@ -885,36 +973,61 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .ListShowTodo{
-//     display: flex;
-//     width: 100%;
-//     margin-top: 10px;
-//     justify-content: space-between;
-//     .showDeadline{
-//         display: flex;
-//         align-items:center;
-//         i{
-//             margin-right: 3px;
-//             color: #cf460c;
-//         }
-//     }
-//     .showFileUpLoadCard{
-//         display: flex;
-//         align-items:center;
-//         i{
-//             margin-right: 3px;
-//             color: #201dee;
-//         }
-//     }
-//     .showIconCheckList{
-//         display: flex;
-//         align-items:center;
-//         i{
-//             margin-right: 3px;
-//             color: #cbee1d;
-//         }
-//     }
-// }
+.ListShowTodo{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+    .showDeadline{
+        display: flex;
+        align-items:center;
+        i{
+            margin-right: 3px;
+            color: #cf460c;
+        }
+    }
+}
+.success {
+    background-color: rgb(97, 189, 79);
+    padding: 7px;
+    padding-right: 10px;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 7px;
+}
+
+.lastDeadline {
+    // background-color: rgb(235, 39, 39);
+    // margin-left: 10px;
+    // padding: 7px;
+    // padding-right: 10px;
+    // color: #fff;
+    // font-weight: 500;
+    // border-radius: 7px;
+}
+
+.deadlineWrap {
+    margin-top: 20px;
+
+    .deadlineTitle {
+        display: flex;
+        margin-top: 10px;
+        align-items: center;
+
+        .deadlineShow {
+            margin-left: 10px;
+            background-color: #e7e9ec;
+            padding: 7px;
+            border-radius: 7px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #c1c3c6;
+            }
+        }
+    }
+}
+
 .showFile {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -946,6 +1059,8 @@ export default {
 
             .imgWrap {
                 width: 200px;
+                background-color: #ecc1af;
+                border-radius: 5px;
                 margin-right: 20px;
 
                 img {

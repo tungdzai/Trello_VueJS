@@ -20,7 +20,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>                                          
+                                </div>
                                 <div class="form_name">
                                     <div class="form_control">
                                         <span class="input_name">Họ & Tên</span>
@@ -31,7 +31,7 @@
                             <div class="form_control form_submit">
                                 <button class="submit" @click="uploadfile">Lưu thay đổi</button>
                             </div>
-                            <input id="image" type="file" style="display:none" />
+                            <input id="image" type="file" @change="changePreviewAvatar" style="display:none" />
                         </form>
                     </div>
                 </div>
@@ -45,10 +45,6 @@
                                     <span>Địa chỉ Email</span>
                                     <span>{{inputemail}}</span>
                                 </div>
-                            </div>
-                            <div class="status">
-                                <span></span>
-                                <button class="button active" @click="clickemail">Cập nhật</button>
                             </div>
                         </div>
                     </div>
@@ -88,7 +84,7 @@ export default {
             inputname: '',
             inputemail: '',
             datainfo: {},
-            image: "https://frontend.tikicdn.com/_desktop-next/static/img/account/avatar.png"
+            image: ""
         }
     },
     mounted() {
@@ -96,21 +92,40 @@ export default {
             this.datainfo = res.data
             this.inputname = this.datainfo.name;
             this.inputemail = this.datainfo.email
-            this.image = "http://vuecourse.zent.edu.vn/storage/users/" + this.datainfo.avatar
+            if (this.datainfo.avatar == null) {
+                this.image = "https://frontend.tikicdn.com/_desktop-next/static/img/account/avatar.png"
+            } else {
+                this.image = "http://vuecourse.zent.edu.vn/storage/users/" + this.datainfo.avatar
+                
+            }
         })
     },
     methods: {
-        editImg(){
+        editImg() {
             document.getElementById('image').click()
         },
         uploadfile() {
             let formdata = new FormData();
             formdata.append('name', this.inputname)
             formdata.append('avatar', document.getElementById("image").files[0])
-            api.postdatauser(formdata).then((res) => {
-                console.log(res);
-                location.reload()
+            api.postdatauser(formdata).then(() => {
+                api.infoAuthme().then((res) => {
+                    this.datainfo = res.data
+                    this.inputname = this.datainfo.name;
+                    this.inputemail = this.datainfo.email
+                    if (this.datainfo.avatar == null) {
+                        this.image = "https://frontend.tikicdn.com/_desktop-next/static/img/account/avatar.png"
+                    } else {
+                        this.image = "http://vuecourse.zent.edu.vn/storage/users/" + this.datainfo.avatar
+                        location.reload()
+                    }
+                })
             })
+        },
+        changePreviewAvatar(e) {
+            console.log(e);
+            const file = e.target.files[0];
+            this.image = URL.createObjectURL(file);
         },
         clickemail() {
             this.$router.push({
@@ -133,7 +148,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 // #image{
 //     position: absolute;
 //     left: 120px;
@@ -152,6 +166,7 @@ export default {
 
 .accountinfoWrap {
     background-color: #e9ecef;
+    width: 100%;
 }
 
 .info {
@@ -178,7 +193,7 @@ export default {
                 .avtarWrap {
                     display: flex;
                     position: relative;
-                    border: 4px solid rgb(194, 225, 255);
+                    border: 4px solid #fea077;
                     width: 112px;
                     height: 112px;
                     background-color: rgb(240, 248, 255);
@@ -281,10 +296,16 @@ export default {
                     border-radius: 4px;
                     color: rgb(255, 255, 255);
                     font-size: 14px;
-                    background-color: rgb(11, 116, 229);
+                    background-color: #ff5f1b;
                     cursor: pointer;
                     margin-top: 40px;
                     padding: 0 40px;
+
+                    &:hover {
+                        background-color: #f65009;
+                        font-weight: bold;
+
+                    }
                 }
             }
         }
@@ -349,7 +370,7 @@ export default {
                 }
 
                 .status {
-                    color: rgb(27, 168, 255);
+                    color: #ff5f1b;
                     justify-content: space-between;
                     display: flex;
 
@@ -359,9 +380,14 @@ export default {
                         font-size: 14px;
                         cursor: pointer;
                         padding: 0px 12px;
-                        color: rgb(11, 116, 229);
-                        border: 1px solid rgb(11, 116, 229);
+                        color: #ff5f1b;
+                        border: 1px solid #ff5f1b;
                         background-color: rgb(255, 255, 255);
+
+                        &:hover {
+                            color: #fff;
+                            background-color: #ff5f1b;
+                        }
                     }
                 }
             }

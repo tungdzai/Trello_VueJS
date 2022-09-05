@@ -13,17 +13,18 @@
                 <el-badge class="icon-header">
                     <i class="el-icon-message-solid" style="color:#fff"></i>
                 </el-badge>
-                <el-dropdown>
-                    <el-avatar src="https://24s.vn/anh-dai-dien-cho-facebook-de-thuong/imager_3918.jpg" />
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item style="padding:0 10px">
-                            <div @click="accountInfo()">Tài khoản của tôi</div>
-                        </el-dropdown-item>
-                        <el-dropdown-item style="padding:0 10px">Đổi mật khẩu</el-dropdown-item>
-                        <el-dropdown-item style="padding:0 10px">
-                            <p @click="signout()"> Đăng xuất</p>
-                        </el-dropdown-item>
-                    </el-dropdown-menu>
+                <el-dropdown style="cursor: pointer">
+                    <div @click="homeTrello">
+                        <el-avatar :src="image" />
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item style="padding:0 10px">
+                                <div @click="accountInfo()">Tài khoản của tôi</div>
+                            </el-dropdown-item>
+                            <el-dropdown-item style="padding:0 10px">
+                                <p @click="signout()"> Đăng xuất</p>
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </div>
                 </el-dropdown>
             </div>
         </el-header>
@@ -43,23 +44,39 @@ export default {
     name: 'AdminLayout',
     data() {
         return {
+            datainfo: {},
+            image: ""
         }
     },
     mounted() {
+        api.infoAuthme().then((res) => {
+            this.datainfo = res.data
+            if(this.datainfo.avatar == null){
+                this.image="https://24s.vn/anh-dai-dien-cho-facebook-de-thuong/imager_3918.jpg"
+            }else{
+                this.image = "http://vuecourse.zent.edu.vn/storage/users/" + this.datainfo.avatar
+            }
+        })
     },
-    computed: {
-    },
-    watch: {
-    },
+    computed: {},
+    watch: {},
     methods: {
-        accountInfo() {    
-            api.infoAuthme().then(() => {
-                 this.$router.push({
-                path: 'accountInFormation',
+        homeTrello() {
+            this.$router.push({
+                path: 'AdminLayout',
                 query: {
-                    plan: 'info'
+                    plan: 'private'
                 }
             })
+        },
+        accountInfo() {
+            api.infoAuthme().then(() => {
+                this.$router.push({
+                    path: 'accountInFormation',
+                    query: {
+                        plan: 'info'
+                    }
+                })
             })
         },
 
@@ -78,7 +95,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 * {
     margin: 0;
     padding: 0;
@@ -87,6 +103,7 @@ export default {
 }
 
 .main {
+    cursor: pointer;
     display: flex;
 }
 
@@ -101,7 +118,7 @@ export default {
     border-bottom: 1px solid hsl(201deg 18% 73%);
     height: 50px;
     width: 100%;
-    background-color:#ff5f1b;
+    background-color: #ff5f1b;
     padding: 0 24px;
 
     .headerLeftWrap {
@@ -116,14 +133,15 @@ export default {
         display: flex;
         align-items: center;
 
-        .inputSearch{
+        .inputSearch {
             background-color: #fff;
             padding: 5px 10px;
             display: flex;
             align-items: center;
             border-radius: 10px;
             margin-right: 15px;
-            input{
+
+            input {
                 border: none;
                 outline: none;
                 padding-left: 10px;

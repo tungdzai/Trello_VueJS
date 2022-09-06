@@ -24,7 +24,7 @@
                         </el-dropdown>
                     </div>
                     <ul>
-                        <draggable group="col_task" :list="value.cards" :move="moveCards" >
+                        <draggable group="col_task" :list="value.cards" :move="moveCards">
                             <li v-for="element in value.cards" :key="element.id" @click="dialogFormVisible = true, clickli(element)">
 
                                 <div class="ColorLabelWrap">
@@ -33,8 +33,8 @@
 
                                 <span>{{element.title.charAt(0).toUpperCase()+element.title.slice(1)}}</span>
 
-                                <div class="ListShowTodo" >
-                                    <div class="showDeadline" >
+                                <div class="ListShowTodo">
+                                    <div class="showDeadline">
                                         <i class="el-icon-time" v-if="element.deadline != null"></i>
                                         <span style="color:rgb(97, 189, 79)" v-if="element.status === 1">{{element.deadline}}</span>
                                         <span v-else>{{element.deadline}}</span>
@@ -197,9 +197,9 @@
                                             <i class="el-icon-folder-checked" style="color:#ff7f7f"></i>
                                             <p class="tododes">Việc cần làm</p>
                                         </div>
-                                        <div class="addTocard_des">
-                                            <i class="el-icon-time" style="color:rgb(127 210 255)"></i>
-                                            <p>Ngày</p>
+                                        <div class="block">
+                                            <el-date-picker v-model="deadline" type="datetime" placeholder="Ngày" @blur="handleUpdateDeadline">
+                                            </el-date-picker>
                                         </div>
                                         <div class="addTocard_des" @click="UploadFilesCard" :plain="true">
                                             <i class="el-icon-paperclip" style="color:rgb(159 255 127)"></i>
@@ -288,11 +288,6 @@
                                         <input type="file" @change="onChangeFile" id="fileInput" style="display:none">
                                         <!-- datePicker -->
 
-                                        <div class="block">
-                                            <el-date-picker v-model="deadline" type="datetime" placeholder="Select date and time" @blur="handleUpdateDeadline">
-                                            </el-date-picker>
-                                        </div>
-
                                     </div>
                                 </form>
                             </el-dialog>
@@ -347,7 +342,7 @@ export default {
 
     data() {
         return {
-            lenghtFileUpLOAD:'',
+            lenghtFileUpLOAD: '',
             deadlineShowCheck: true,
             statusCard: false,
             checked: true,
@@ -441,8 +436,7 @@ export default {
             dataLabelsShow: [],
             objEditLabel: {},
             deadlineShow: '',
-            vatatarcard:''
-
+            vatatarcard: ''
 
         }
     },
@@ -456,7 +450,7 @@ export default {
         // changedirectory(e){
         //     console.log(e);
         // },
-        AddAvatartCard(item){
+        AddAvatartCard(item) {
             console.log(item);
         },
         updateStatusCard() {
@@ -464,8 +458,7 @@ export default {
                 "status": this.statusCard ? 1 : 0
             }
             api.updateStatusCard(data, this.cloneItem.id).then(() => {
-                api.getlistCard(this.cloneItem.id).then(() => {
-                })
+                api.getlistCard(this.cloneItem.id).then(() => {})
             })
         },
         handleUpdateDeadline() {
@@ -516,19 +509,18 @@ export default {
             console.log(item);
             let data = {
                 "index": item.draggedContext.futureIndex,
-                "directory_id":item.relatedContext.element.directory_id
+                "directory_id": item.relatedContext.element.directory_id
             }
             api.putcardslocation(data, item.draggedContext.element.id).then(() => {
-                api.putchangecards(data,item.draggedContext.element.id).then(()=>{
-                    
+                api.putchangecards(data, item.draggedContext.element.id).then(() => {
+
                 })
             })
         },
 
-        
         moveColumn(item) {
-            let data={
-                'index':item.draggedContext.futureIndex
+            let data = {
+                'index': item.draggedContext.futureIndex
             }
             api.updataDirectories(data, item.draggedContext.element.id).then(() => {
 
@@ -973,20 +965,65 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ListShowTodo{
+.block {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.block ::v-deep {
+    .el-input__inner {
+        cursor: pointer;
+        background-color: #e9ecef;
+        width: 177.5px;
+        height: 31px;
+    }
+}
+
+.block ::v-deep {
+    .el-input__inner::placeholder {
+        /* chạy tốt trên Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #606266 !important;
+        opacity: 1;
+        /* Firefox */
+    }
+
+    .cs-input:-ms-input-placeholder {
+        /* chạy trên Internet Explorer 10-11 */
+        color: #606266 !important;
+    }
+
+    .cs-input::-ms-input-placeholder {
+        /* chạy trên Microsoft Edge */
+        color: #606266 !important;
+    }
+
+}
+
+.block ::v-deep {
+    .el-input__icon {
+        color: #b04632;
+        line-height: 32px;
+        font-size: 17px;
+    }
+}
+
+.ListShowTodo {
     display: flex;
     width: 100%;
     justify-content: space-between;
     margin-top: 10px;
-    .showDeadline{
+
+    .showDeadline {
         display: flex;
-        align-items:center;
-        i{
+        align-items: center;
+
+        i {
             margin-right: 3px;
             color: #cf460c;
         }
     }
 }
+
 .success {
     background-color: rgb(97, 189, 79);
     padding: 7px;
